@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AvaSchematic demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./app.css" />
+</head>
+
+<body>
+<!--
+  The splash is ours rather than the Avalonia template's, for two reasons.
+
+  It has a progress bar. The runtime and the application are several megabytes before anything can be
+  drawn, which on a slow connection is a long time to look at a logo and wonder whether the page is
+  broken. main.js counts the bytes as they arrive and drives the bar.
+
+  And it has a failure state. A WebAssembly runtime that aborts leaves a blank page and a console message
+  nobody will look at; a visitor deserves a sentence saying so, and somewhere else to go.
+
+  The class name is the one Avalonia looks for - it adds splash-close when the application takes over.
+-->
+<div id="out">
+    <div class="avalonia-splash">
+        <div class="boot">
+            <p class="boot-brand">Ava<span>Schematic</span></p>
+            <p class="boot-line" id="boot-line">Starting…</p>
+            <div class="boot-track"><div class="boot-bar" id="boot-bar"></div></div>
+            <p class="boot-hint" id="boot-hint">
+                The control is compiled to WebAssembly, so it has to arrive before it can draw anything.
+                Your browser keeps it after the first visit.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!--
+  The file:// case is answered here rather than in main.js, and it has to be.
+
+  A module script is fetched with CORS, and a page opened from disk has the origin `null`, so the browser
+  refuses to load main.js at all - before a line of it runs. What the visitor would see is the splash
+  sitting on "Starting…" for ever, which reads as a hang rather than as an answer. This is a classic
+  inline script, which is the one kind that does run from disk.
+-->
+<script>
+    if (location.protocol === 'file:') {
+        document.querySelector('.boot').classList.add('failed');
+        document.getElementById('boot-line').textContent = 'This page has to be served over http.';
+        document.getElementById('boot-hint').innerHTML =
+            'A file:// page cannot fetch the runtime it needs. Serve the folder — ' +
+            '<code>python3 -m http.server</code> in it will do — or open the hosted demo at ' +
+            '<a href="https://pavel-zheltiakov.github.io/AvaSchematic/demo/">pavel-zheltiakov.github.io/AvaSchematic/demo/</a>.';
+    }
+</script>
+<script type="module" src="./main.js"></script>
+</body>
+
+</html>

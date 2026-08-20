@@ -1,0 +1,176 @@
+<!--
+    The demo itself, as a view rather than a window, so that the same markup and the same code-behind
+    serve the desktop head and the browser head. A browser tab has no windows: its application lifetime
+    hands over one view, and anything that insisted on being a Window could not be shown in it at all.
+-->
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sch="clr-namespace:AvaSchematic.Controls;assembly=AvaSchematic"
+             x:Class="AvaSchematic.Demo.MainView">
+
+    <UserControl.Styles>
+        <Style Selector="Button.tool">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="MinWidth" Value="0" />
+        </Style>
+        <Style Selector="ToggleButton.tool">
+            <Setter Property="Padding" Value="10,5" />
+        </Style>
+        <Style Selector="Button.palette">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="Margin" Value="0,1" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style Selector="TextBlock.section">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,10,0,4" />
+            <Setter Property="Opacity" Value="0.7" />
+            <Setter Property="FontSize" Value="11" />
+        </Style>
+        <Style Selector="TextBlock.field">
+            <Setter Property="Opacity" Value="0.7" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Margin" Value="0,6,0,2" />
+        </Style>
+    </UserControl.Styles>
+
+    <DockPanel>
+
+        <!-- toolbar -->
+        <Border DockPanel.Dock="Top" Padding="8,6" BorderThickness="0,0,0,1"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <TextBlock Text="Sample" VerticalAlignment="Center" Opacity="0.7" />
+                <ComboBox x:Name="SampleBox" Width="170" SelectedIndex="0">
+                    <ComboBoxItem>Mind map</ComboBoxItem>
+                    <ComboBoxItem>Architecture</ComboBoxItem>
+                    <ComboBoxItem>Flowchart</ComboBoxItem>
+                    <ComboBoxItem>UML classes</ComboBoxItem>
+                    <ComboBoxItem>Electronics</ComboBoxItem>
+                    <ComboBoxItem>Wiring rules</ComboBoxItem>
+                    <ComboBoxItem>Empty sheet</ComboBoxItem>
+                </ComboBox>
+
+                <Rectangle Width="1" Fill="{DynamicResource SystemControlForegroundBaseLowBrush}" Margin="4,2" />
+
+                <ToggleButton x:Name="SelectToolButton" Classes="tool" IsChecked="True" Content="Select" />
+                <ToggleButton x:Name="WireToolButton" Classes="tool" Content="Connect" />
+                <ToggleButton x:Name="PanToolButton" Classes="tool" Content="Pan" />
+
+                <Rectangle Width="1" Fill="{DynamicResource SystemControlForegroundBaseLowBrush}" Margin="4,2" />
+
+                <TextBlock Text="Route" VerticalAlignment="Center" Opacity="0.7" />
+                <ComboBox x:Name="RouteBox" Width="140" SelectedIndex="0">
+                    <ComboBoxItem>Orthogonal</ComboBoxItem>
+                    <ComboBoxItem>Direct</ComboBoxItem>
+                    <ComboBoxItem>Curved</ComboBoxItem>
+                </ComboBox>
+
+                <Button x:Name="UndoButton" Classes="tool" Content="Undo" />
+                <Button x:Name="RedoButton" Classes="tool" Content="Redo" />
+                <Button x:Name="DeleteButton" Classes="tool" Content="Delete" />
+                <Button x:Name="RotateButton" Classes="tool" Content="Rotate" />
+                <Button x:Name="Rotate45Button" Classes="tool" Content="45°" />
+                <Button x:Name="MirrorButton" Classes="tool" Content="Mirror" />
+
+                <Rectangle Width="1" Fill="{DynamicResource SystemControlForegroundBaseLowBrush}" Margin="4,2" />
+
+                <Button x:Name="FitButton" Classes="tool" Content="Fit" />
+                <Button x:Name="ZoomInButton" Classes="tool" Content="+" />
+                <Button x:Name="ZoomOutButton" Classes="tool" Content="−" />
+                <ToggleButton x:Name="GridButton" Classes="tool" IsChecked="True" Content="Grid" />
+                <ToggleButton x:Name="SnapButton" Classes="tool" IsChecked="True" Content="Snap" />
+
+                <TextBlock Text="Theme" VerticalAlignment="Center" Opacity="0.7" Margin="6,0,0,0" />
+                <ComboBox x:Name="ThemeBox" Width="120" SelectedIndex="0">
+                    <ComboBoxItem>Light</ComboBoxItem>
+                    <ComboBoxItem>Dark</ComboBoxItem>
+                    <ComboBoxItem>Blueprint</ComboBoxItem>
+                </ComboBox>
+
+                <Button x:Name="NetlistButton" Classes="tool" Content="Netlist" />
+                <Button x:Name="JsonButton" Classes="tool" Content="JSON round-trip" />
+            </StackPanel>
+        </Border>
+
+        <!-- status bar -->
+        <Border DockPanel.Dock="Bottom" Padding="10,4" BorderThickness="0,1,0,0"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <StackPanel Orientation="Horizontal" Spacing="18">
+                <TextBlock x:Name="StatusText" Text="Ready" FontSize="11" />
+                <TextBlock x:Name="ZoomText" Text="100%" FontSize="11" Opacity="0.7" />
+                <TextBlock x:Name="HintText" FontSize="11" Opacity="0.55"
+                           Text="Drag to move · double-click a shape to rename · Connect tool: click pin → click pin · R rotate (step is a rule) · M mirror · select a line then drag a diamond to slide one run · Ctrl+Z undo" />
+            </StackPanel>
+        </Border>
+
+        <!-- symbol palette -->
+        <Border DockPanel.Dock="Left" Width="220" Padding="10,6" BorderThickness="0,0,1,0"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="Symbols" FontWeight="SemiBold" Margin="0,2,0,6" />
+                <TextBox DockPanel.Dock="Top" x:Name="PaletteFilter" PlaceholderText="Filter…" Margin="0,0,0,6" />
+                <ScrollViewer>
+                    <StackPanel x:Name="PalettePanel" />
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+
+        <!-- inspector -->
+        <Border DockPanel.Dock="Right" Width="250" Padding="10,6" BorderThickness="1,0,0,0"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <ScrollViewer>
+                <StackPanel x:Name="InspectorPanel">
+                    <TextBlock Text="Inspector" FontWeight="SemiBold" Margin="0,2,0,6" />
+                    <TextBlock x:Name="InspectorEmpty" Text="Nothing selected." Opacity="0.6" FontSize="12" />
+                    <StackPanel x:Name="InspectorContent" IsVisible="False">
+                        <TextBlock x:Name="InspectorKind" FontSize="12" FontWeight="SemiBold" />
+
+                        <TextBlock Text="Text" Classes="field" />
+                        <TextBox x:Name="TextField" />
+
+                        <TextBlock Text="Designator" Classes="field" />
+                        <TextBox x:Name="DesignatorField" />
+
+                        <TextBlock Text="Value" Classes="field" />
+                        <TextBox x:Name="ValueField" />
+
+                        <TextBlock Text="Rotation" Classes="field" />
+                        <NumericUpDown x:Name="RotationField" Increment="90" Minimum="-360" Maximum="360" />
+
+                        <TextBlock Text="Connection label" Classes="field" />
+                        <TextBox x:Name="LabelField" />
+
+                        <TextBlock Text="Arrow head" Classes="field" />
+                        <ComboBox x:Name="ArrowBox" HorizontalAlignment="Stretch" />
+
+                        <TextBlock Text="Line style" Classes="field" />
+                        <ComboBox x:Name="LineStyleBox" HorizontalAlignment="Stretch" />
+                    </StackPanel>
+
+                    <TextBlock Classes="section" Text="Drawing rules" />
+                    <CheckBox x:Name="AvoidOverlapCheck" Content="No parallel runs" IsChecked="True" FontSize="12" />
+                    <CheckBox x:Name="AvoidSymbolsCheck" Content="Go round symbols" IsChecked="True" FontSize="12" />
+                    <CheckBox x:Name="TeeJunctionCheck" Content="Dot a tap" IsChecked="True" FontSize="12" />
+                    <CheckBox x:Name="CrossingJunctionCheck" Content="Dot every crossing" FontSize="12" />
+                    <CheckBox x:Name="PinBranchCheck" Content="A pin is a branch" FontSize="12" />
+                    <CheckBox x:Name="SegmentDragCheck" Content="Drag single segments" IsChecked="True" FontSize="12" />
+                    <TextBlock Text="Branches per junction" Classes="field" />
+                    <NumericUpDown x:Name="JunctionBranchesField" Value="3" Minimum="2" Maximum="8" Increment="1" />
+                    <TextBlock Text="Rotation step (degrees)" Classes="field" />
+                    <NumericUpDown x:Name="RotationStepField" Value="90" Minimum="1" Maximum="180" Increment="15" />
+                    <Button x:Name="CheckRulesButton" Classes="tool" Content="Check rules" Margin="0,6,0,0" />
+
+                    <TextBlock Classes="section" Text="Report" />
+                    <TextBox x:Name="ReportBox" AcceptsReturn="True" IsReadOnly="True" MinHeight="220"
+                             FontFamily="Menlo, Consolas, monospace" FontSize="10"
+                             TextWrapping="NoWrap" />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <sch:SchematicView x:Name="View" />
+    </DockPanel>
+</UserControl>

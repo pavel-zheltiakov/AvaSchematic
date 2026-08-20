@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net10.0-browser</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <!--
+      Trimmed, and safe to be: the control's serializer is source-generated, so nothing it needs is
+      reached by a name the trimmer cannot see. Four megabytes of the twenty, for a build flag.
+    -->
+    <PublishTrimmed>true</PublishTrimmed>
+    <!-- No ICU: two megabytes of collation tables for an application whose text is drawn by HarfBuzz
+         and whose only culture-sensitive operation is formatting a number. -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!--
+      No WasmBuildNative and no threads, deliberately.
+
+      Both are things a browser head needs when managed code reaches native code by function pointer or
+      does enough arithmetic per frame to be worth spreading over cores. This control does neither: it
+      draws through Avalonia's own drawing context and the work per frame is a few hundred lines and
+      some text. Relinking would cost a minute of emscripten on every build and threads would cost a
+      cross-origin-isolated page - a service worker, on a host that cannot set headers - for nothing
+      anybody could measure.
+    -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Browser" Version="12.1.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\AvaSchematic.Demo\AvaSchematic.Demo.csproj" />
+  </ItemGroup>
+</Project>

@@ -6,6 +6,7 @@ mindmaps, flowcharts, UML and architecture drawings, on one node–port–connec
 You say which pins are joined. It works out where every line runs, keeps two lines out of one lane, takes
 them round the parts they are not wired to, and puts a junction dot exactly where three legs of a net meet.
 
+**[Try it in your browser →](https://pavel-zheltiakov.github.io/AvaSchematic/demo/)** ·
 **[Documentation, guide and API reference →](https://pavel-zheltiakov.github.io/AvaSchematic/)**
 
 ```
@@ -25,17 +26,22 @@ honest way to find out whether the published package works.
 
 | | |
 |---|---|
-| `docs/` | The site, served by GitHub Pages. Home, the guide, the API reference and the releases page. |
-| `demo/` | The demo application, restoring `AvaSchematic` from nuget.org. |
+| `docs/` | The site, served by GitHub Pages. Home, the demo, the guide, the API reference and the releases page. |
+| `docs/demo/` | The demo compiled to WebAssembly — what the Demo link opens. |
+| `demo/` | The demo's source: the view, the desktop head and the browser head, restoring `AvaSchematic` from nuget.org. |
 | `LICENSE.md` | Freeware, commercial use included. |
 | `THIRD-PARTY-NOTICES.md` | What the library and the demo build on. |
 
 ## Running the demo
 
+Nothing to install: **[open it in your browser](https://pavel-zheltiakov.github.io/AvaSchematic/demo/)**.
+
+Or run it on your machine, where it is a window rather than a tab:
+
 ```
 git clone https://github.com/pavel-zheltiakov/AvaSchematic.git
 cd AvaSchematic/demo
-dotnet run --project AvaSchematic.Demo
+dotnet run --project AvaSchematic.Demo.Desktop
 ```
 
 Six sample sheets, an inspector, and every drawing rule as a switch you can turn off to see what it was
