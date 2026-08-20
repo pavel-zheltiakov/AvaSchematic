@@ -295,6 +295,16 @@ body.demo-page {
   background: #06080d;
 }
 
+/* The film, and the still a browser with no video falls back to. Both fill the frame and neither is
+   allowed to make the page taller than the picture it is showing. */
+.stage-frame > video,
+.stage-frame > img,
+.stage-frame > video > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .stage-note {
   margin: 0;
   padding: 12px 22px 14px;

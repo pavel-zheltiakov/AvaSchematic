@@ -87,15 +87,24 @@
 </section>
 </div>
 
-<!-- One picture, full width, before any prose: a schematic is a thing you recognise on sight. -->
+<!--
+  A minute of drawing, before any prose. It is not a screen recording: the renderer takes any drawing
+  context, so the film is the same document drawn 1740 times with a little more of it revealed each time -
+  see tools/AvaSchematic.Reel. Muted and looping, because a landing page that makes a noise is a landing
+  page people close; controls are on, because a film that cannot be paused is worse than one nobody plays.
+-->
 <section class="stage">
   <div class="stage-frame">
-    <img src="shots/electronics.png" width="1800" height="1200" alt="An amplifier and LED driver schematic: an op-amp with its feedback network, a transistor driving an LED, a microcontroller, junction dots where nets branch and unconnected pins ringed in orange.">
+    <video src="reel/avaschematic.mp4" poster="reel/avaschematic.jpg" width="1600" height="900"
+           autoplay muted loop playsinline controls preload="metadata"
+           aria-label="A mind map, an architecture drawing, a UML class diagram and an electronic schematic, each drawn one part and one wire at a time.">
+      <img src="shots/electronics.png" width="1800" height="1200" alt="An amplifier and LED driver schematic: an op-amp with its feedback network, a transistor driving an LED, a microcontroller, junction dots where nets branch and unconnected pins ringed in orange.">
+    </video>
   </div>
   <p class="stage-note" data-i18n-html="stage.note">
-    <strong>Every line here was placed by the library.</strong> The document says the op-amp output is joined
-    to R4 pin 1; where that line runs, which lane it takes and where the dots go are worked out from the
-    drawing conventions, and worked out again the moment anything moves.
+    <strong>Every line in that film was placed by the library.</strong> The document says the op-amp output
+    is joined to R4 pin 1; where that line runs, which lane it takes and where the dots go are worked out
+    from the drawing conventions, and worked out again the moment anything moves.
   </p>
 </section>
 
