@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4 · Dots and nets · AvaSchematic</title>
+<link rel="stylesheet" href="../header.css">
+<link rel="stylesheet" href="api.css">
+</head>
+<body>
+<header class="bar"><nav class="nav" aria-label="Site">
+  <a class="brand" href="../index.html" title="Home">Ava<span>Schematic</span></a>
+  <span class="tag">12.1.0-preview.1 · beta</span>
+  <div class="links">
+    <a href="../index.html">Home</a>
+    <a href="your-first-schematic.html">Guide</a>
+    <a href="index.html#reference">API Reference</a>
+    <a href="../releases.html">Releases</a>
+  </div>
+  <div class="links tools">
+    <details class="fb">
+      <summary>Feedback</summary>
+      <div class="fb-pop">
+        <a href="https://github.com/pavel-zheltiakov/AvaSchematic/issues"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg><span><b>GitHub Issues</b><small>A bug, a missing thing, a question — in the open, where the answer helps the next person.</small></span></a>
+      </div>
+    </details>
+    <a class="nav-ico" href="https://github.com/pavel-zheltiakov/AvaSchematic" title="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+  </div>
+</nav></header>
+<div class="shell">
+<aside class="side">
+<nav class="toc" aria-label="Documentation"><a class="toc-top" href="index.html">Overview</a><details class="group" open><summary>Guide</summary><ul><li><a href="your-first-schematic.html">1 · Your first schematic</a></li><li><a href="parts-and-pins.html">2 · Parts and pins</a></li><li><a href="wires.html">3 · Wires</a></li><li><a class="current" aria-current="page" href="dots-and-nets.html">4 · Dots and nets</a><ul class="sub"><li><a href="#net">A net</a></li><li><a href="#dot">When a dot is drawn</a></li><li><a href="#check">Reading the drawing back to you</a></li></ul></li><li><a href="editing.html">5 · Editing with the mouse</a></li><li><a href="your-own-symbol.html">6 · Drawing your own part</a></li><li><a href="saving.html">7 · Saving, loading and checking</a></li><li><a href="glossary.html">Glossary</a></li></ul></details><details class="group"><summary>Concepts</summary><ul><li><a href="how-a-sheet-is-laid-out.html">How a sheet is laid out</a></li><li><a href="the-rulebook.html">The rulebook</a></li><li><a href="painting.html">How the drawing is painted</a></li></ul></details><details class="group"><summary>The control</summary><ul><li><a href="AvaSchematic.Controls.SchematicView.html">Controls.SchematicView</a></li><li><a href="AvaSchematic.Controls.SchematicViewport.html">Controls.SchematicViewport</a></li><li><a href="AvaSchematic.Controls.WheelBehavior.html">Controls.WheelBehavior</a></li><li><a href="AvaSchematic.Controls.SchematicItemEventArgs.html">Controls.SchematicItemEventArgs</a></li></ul></details><details class="group"><summary>The drawing</summary><ul><li><a href="AvaSchematic.Model.SchematicDocument.html">Model.SchematicDocument</a></li><li><a href="AvaSchematic.Model.SchematicItem.html">Model.SchematicItem</a></li><li><a href="AvaSchematic.Model.SchematicNode.html">Model.SchematicNode</a></li><li><a href="AvaSchematic.Model.SchematicConnection.html">Model.SchematicConnection</a></li><li><a href="AvaSchematic.Model.SchematicJunction.html">Model.SchematicJunction</a></li><li><a href="AvaSchematic.Model.ConnectionEndpoint.html">Model.ConnectionEndpoint</a></li><li><a href="AvaSchematic.Model.Port.html">Model.Port</a></li><li><a href="AvaSchematic.Model.SchematicAttribute.html">Model.SchematicAttribute</a></li><li><a href="AvaSchematic.Model.AttributeKeys.html">Model.AttributeKeys</a></li><li><a href="AvaSchematic.Model.ItemStyle.html">Model.ItemStyle</a></li><li><a href="AvaSchematic.Model.SchematicLayers.html">Model.SchematicLayers</a></li><li><a href="AvaSchematic.Model.SchematicCloner.html">Model.SchematicCloner</a></li><li><a href="AvaSchematic.Model.SchematicItemsChangedEventArgs.html">Model.SchematicItemsChangedEventArgs</a></li></ul></details><details class="group"><summary>Parts</summary><ul><li><a href="AvaSchematic.Symbols.SymbolLibrary.html">Symbols.SymbolLibrary</a></li><li><a href="AvaSchematic.Symbols.SymbolDefinition.html">Symbols.SymbolDefinition</a></li><li><a href="AvaSchematic.Symbols.SymbolBuilder.html">Symbols.SymbolBuilder</a></li><li><a href="AvaSchematic.Symbols.PortDefinition.html">Symbols.PortDefinition</a></li><li><a href="AvaSchematic.Symbols.Libraries.ElectronicSymbols.html">Symbols.Libraries.ElectronicSymbols</a></li><li><a href="AvaSchematic.Symbols.Libraries.BasicShapes.html">Symbols.Libraries.BasicShapes</a></li><li><a href="AvaSchematic.Symbols.Libraries.FlowchartSymbols.html">Symbols.Libraries.FlowchartSymbols</a></li><li><a href="AvaSchematic.Symbols.Libraries.ArchitectureSymbols.html">Symbols.Libraries.ArchitectureSymbols</a></li></ul></details><details class="group"><summary>What a symbol is drawn from</summary><ul><li><a href="AvaSchematic.Symbols.SymbolPrimitive.html">Symbols.SymbolPrimitive</a></li><li><a href="AvaSchematic.Symbols.SymbolLine.html">Symbols.SymbolLine</a></li><li><a href="AvaSchematic.Symbols.SymbolPolyline.html">Symbols.SymbolPolyline</a></li><li><a href="AvaSchematic.Symbols.SymbolRectangle.html">Symbols.SymbolRectangle</a></li><li><a href="AvaSchematic.Symbols.SymbolEllipse.html">Symbols.SymbolEllipse</a></li><li><a href="AvaSchematic.Symbols.SymbolArc.html">Symbols.SymbolArc</a></li><li><a href="AvaSchematic.Symbols.SymbolPath.html">Symbols.SymbolPath</a></li><li><a href="AvaSchematic.Symbols.SymbolText.html">Symbols.SymbolText</a></li><li><a href="AvaSchematic.Symbols.GeometryUtil.html">Symbols.GeometryUtil</a></li></ul></details><details class="group"><summary>The rulebook</summary><ul><li><a href="AvaSchematic.Model.SchematicRules.html">Model.SchematicRules</a></li></ul></details><details class="group"><summary>Laying out the lines</summary><ul><li><a href="AvaSchematic.Routing.IConnectionRouter.html">Routing.IConnectionRouter</a></li><li><a href="AvaSchematic.Routing.OrthogonalRouter.html">Routing.OrthogonalRouter</a></li><li><a href="AvaSchematic.Routing.DirectRouter.html">Routing.DirectRouter</a></li><li><a href="AvaSchematic.Routing.CurvedRouter.html">Routing.CurvedRouter</a></li><li><a href="AvaSchematic.Routing.PolylineRouter.html">Routing.PolylineRouter</a></li><li><a href="AvaSchematic.Routing.RouteRequest.html">Routing.RouteRequest</a></li><li><a href="AvaSchematic.Routing.RouteResult.html">Routing.RouteResult</a></li><li><a href="AvaSchematic.Routing.RouteKind.html">Routing.RouteKind</a></li><li><a href="AvaSchematic.Routing.RouteUtil.html">Routing.RouteUtil</a></li><li><a href="AvaSchematic.Routing.SegmentEditor.html">Routing.SegmentEditor</a></li><li><a href="AvaSchematic.Routing.SegmentMoveOptions.html">Routing.SegmentMoveOptions</a></li><li><a href="AvaSchematic.Routing.WireOccupancy.html">Routing.WireOccupancy</a></li></ul></details><details class="group"><summary>Reading the drawing back</summary><ul><li><a href="AvaSchematic.Connectivity.NetlistExtractor.html">Connectivity.NetlistExtractor</a></li><li><a href="AvaSchematic.Connectivity.Netlist.html">Connectivity.Netlist</a></li><li><a href="AvaSchematic.Connectivity.Net.html">Connectivity.Net</a></li><li><a href="AvaSchematic.Connectivity.Terminal.html">Connectivity.Terminal</a></li><li><a href="AvaSchematic.Connectivity.JunctionResolver.html">Connectivity.JunctionResolver</a></li><li><a href="AvaSchematic.Connectivity.JunctionPoint.html">Connectivity.JunctionPoint</a></li><li><a href="AvaSchematic.Connectivity.RuleChecker.html">Connectivity.RuleChecker</a></li><li><a href="AvaSchematic.Connectivity.RuleViolation.html">Connectivity.RuleViolation</a></li><li><a href="AvaSchematic.Connectivity.RuleViolationKind.html">Connectivity.RuleViolationKind</a></li></ul></details><details class="group"><summary>Mouse and keyboard</summary><ul><li><a href="AvaSchematic.Interaction.ITool.html">Interaction.ITool</a></li><li><a href="AvaSchematic.Interaction.ToolBase.html">Interaction.ToolBase</a></li><li><a href="AvaSchematic.Interaction.SelectTool.html">Interaction.SelectTool</a></li><li><a href="AvaSchematic.Interaction.WireTool.html">Interaction.WireTool</a></li><li><a href="AvaSchematic.Interaction.PlaceTool.html">Interaction.PlaceTool</a></li><li><a href="AvaSchematic.Interaction.PanTool.html">Interaction.PanTool</a></li><li><a href="AvaSchematic.Interaction.ToolPointerEventArgs.html">Interaction.ToolPointerEventArgs</a></li><li><a href="AvaSchematic.Interaction.SchematicHitTester.html">Interaction.SchematicHitTester</a></li><li><a href="AvaSchematic.Interaction.HitTestResult.html">Interaction.HitTestResult</a></li><li><a href="AvaSchematic.Interaction.HitKind.html">Interaction.HitKind</a></li><li><a href="AvaSchematic.Interaction.HitTestFilter.html">Interaction.HitTestFilter</a></li><li><a href="AvaSchematic.Interaction.ConnectionTools.html">Interaction.ConnectionTools</a></li><li><a href="AvaSchematic.Model.ResizeHandle.html">Model.ResizeHandle</a></li></ul></details><details class="group"><summary>Drawing it</summary><ul><li><a href="AvaSchematic.Rendering.SchematicRenderer.html">Rendering.SchematicRenderer</a></li><li><a href="AvaSchematic.Rendering.SchematicTheme.html">Rendering.SchematicTheme</a></li><li><a href="AvaSchematic.Rendering.SchematicRenderOptions.html">Rendering.SchematicRenderOptions</a></li><li><a href="AvaSchematic.Rendering.DrawingResources.html">Rendering.DrawingResources</a></li></ul></details><details class="group"><summary>Saving and loading</summary><ul><li><a href="AvaSchematic.Serialization.SchematicJson.html">Serialization.SchematicJson</a></li><li><a href="AvaSchematic.Serialization.DocumentDto.html">Serialization.DocumentDto</a></li><li><a href="AvaSchematic.Serialization.ItemDto.html">Serialization.ItemDto</a></li><li><a href="AvaSchematic.Serialization.EndpointDto.html">Serialization.EndpointDto</a></li><li><a href="AvaSchematic.Serialization.PortDto.html">Serialization.PortDto</a></li><li><a href="AvaSchematic.Serialization.AttributeDto.html">Serialization.AttributeDto</a></li><li><a href="AvaSchematic.Serialization.StyleDto.html">Serialization.StyleDto</a></li><li><a href="AvaSchematic.Serialization.RulesDto.html">Serialization.RulesDto</a></li><li><a href="AvaSchematic.Serialization.SymbolDto.html">Serialization.SymbolDto</a></li><li><a href="AvaSchematic.Serialization.PrimitiveDto.html">Serialization.PrimitiveDto</a></li></ul></details><details class="group"><summary>Undo</summary><ul><li><a href="AvaSchematic.Undo.UndoStack.html">Undo.UndoStack</a></li><li><a href="AvaSchematic.Undo.IUndoableAction.html">Undo.IUndoableAction</a></li><li><a href="AvaSchematic.Undo.DelegateAction.html">Undo.DelegateAction</a></li><li><a href="AvaSchematic.Undo.CompositeAction.html">Undo.CompositeAction</a></li></ul></details><details class="group"><summary>The small words</summary><ul><li><a href="AvaSchematic.Model.RouteMode.html">Model.RouteMode</a></li><li><a href="AvaSchematic.Model.ArrowHead.html">Model.ArrowHead</a></li><li><a href="AvaSchematic.Model.LineStyle.html">Model.LineStyle</a></li><li><a href="AvaSchematic.Model.PortSide.html">Model.PortSide</a></li><li><a href="AvaSchematic.Model.PortKind.html">Model.PortKind</a></li><li><a href="AvaSchematic.Model.EndpointKind.html">Model.EndpointKind</a></li><li><a href="AvaSchematic.Model.MirrorMode.html">Model.MirrorMode</a></li><li><a href="AvaSchematic.Model.LabelPlacement.html">Model.LabelPlacement</a></li><li><a href="AvaSchematic.Model.TextHAlign.html">Model.TextHAlign</a></li><li><a href="AvaSchematic.Model.TextVAlign.html">Model.TextVAlign</a></li><li><a href="AvaSchematic.Model.SymbolSizing.html">Model.SymbolSizing</a></li><li><a href="AvaSchematic.Model.BoundaryShape.html">Model.BoundaryShape</a></li><li><a href="AvaSchematic.Model.HitTestMode.html">Model.HitTestMode</a></li><li><a href="AvaSchematic.Model.GridStyle.html">Model.GridStyle</a></li><li><a href="AvaSchematic.Utils.ObservableObject.html">Utils.ObservableObject</a></li><li><a href="AvaSchematic.Utils.UpdateScope.html">Utils.UpdateScope</a></li><li><a href="AvaSchematic.Utils.GeometryExtensions.html">Utils.GeometryExtensions</a></li></ul></details></nav>
+</aside>
+<main>
+<p class="crumb"><a href="index.html">Documentation</a> · Guide</p><h1>4 · Dots and nets</h1><p class="lede">
+  Two lines crossing on a sheet may or may not be joined, and the drawing has to say which. This chapter is
+  about the little black dot that says it, and about getting the answer - what is joined to what - back out
+  as data.
+</p>
+
+<h2 id="net">A net</h2>
+
+<p>
+  Everything electrically joined together is one <a href="glossary.html#g-net">net</a>. Three wires, a
+  junction and six <a class="term-link" href="glossary.html#g-pin">pins</a> can all be one net; the drawing has many lines but the circuit has one node.
+</p>
+
+<p>
+  You never build a net. You draw wires, and the net falls out of them: two pins are on the same net if you
+  can get from one to the other by following lines. Working that out is one call.
+</p>
+
+<pre><code><span class="k">var</span> netlist = <span class="k">new</span> NetlistExtractor().Extract(document);
+
+<span class="k">foreach</span> (<span class="k">var</span> net <span class="k">in</span> netlist.Nets)
+    Console.WriteLine(net);            <span class="c">// N3: R7.2, Q1.B, C4.1</span>
+
+<span class="k">foreach</span> (<span class="k">var</span> loose <span class="k">in</span> netlist.UnconnectedTerminals)
+    Console.WriteLine($<span class="s">"nothing reaches {loose.Reference}"</span>);</code></pre>
+
+<p>
+  A net that reaches a <a href="glossary.html#g-net-label">net label</a>, a
+  <a href="glossary.html#g-ground">ground</a> or a <a href="glossary.html#g-power-rail">power rail</a> takes
+  its name from it - GND, +5V, PWM - and anything else gets a number. Two grounds drawn on opposite corners
+  of the sheet with no wire between them are still one net, because they carry the same name. That is the
+  whole point of the ground <a class="term-link" href="glossary.html#g-symbol">symbol</a>: it saves you drawing a wire to everything.
+</p>
+
+<h2 id="dot">When a dot is drawn</h2>
+
+<p>
+  A <a href="glossary.html#g-junction">junction dot</a> means <em>these lines are joined here</em>. No dot
+  means they merely cross. Getting this wrong is the classic way to publish a circuit that cannot work, so
+  the rule is strict and the drawing follows it by itself:
+</p>
+
+<div class="diagram">
+<svg viewBox="0 0 720 190" role="img" aria-labelledby="dot-title dot-desc">
+  <title id="dot-title">Crossing, tap, corner and four-way</title>
+  <desc id="dot-desc">
+    Four small drawings. A plain crossing of two lines has no dot. A line ending on another line has a dot.
+    Two lines meeting at a right-angle corner has no dot. Four lines meeting at one point has a dot.
+  </desc>
+
+  <path class="d-edge" d="M30 90 L150 90 M90 40 L90 140"/>
+  <text class="d-sub" x="42" y="170">crossing · no dot</text>
+
+  <path class="d-edge" d="M200 90 L320 90 M260 90 L260 140"/>
+  <circle class="d-head" cx="260" cy="90" r="5"/>
+  <text class="d-sub" x="228" y="170">tap · dot</text>
+
+  <path class="d-edge" d="M370 90 L430 90 L430 140"/>
+  <text class="d-sub" x="378" y="170">corner · no dot</text>
+
+  <path class="d-edge" d="M530 90 L650 90 M590 40 L590 140"/>
+  <circle class="d-head" cx="590" cy="90" r="5"/>
+  <text class="d-sub" x="536" y="170">four ways · dot</text>
+</svg>
+</div>
+
+<p>
+  The rule the library applies is: count the <strong>distinct directions</strong> lines of one net leave the
+  point in, and require at least one of them to actually start, end or turn there. Three or more, and it is
+  a junction. A corner is only two directions, so no dot. A pin with one wire arriving is a terminal, not a
+  branch, so no dot - unless you ask for that style, which some houses use.
+</p>
+
+<pre><code>document.Rules.JunctionMinBranches = 3;      <span class="c">// the default</span>
+document.Rules.CountPinsAsBranches = <span class="k">true</span>;   <span class="c">// dot every terminal, if that is your style</span>
+document.Rules.JunctionOnCrossing  = <span class="k">true</span>;   <span class="c">// only for diagrams where a crossing really is a join</span></code></pre>
+
+<h2 id="check">Reading the drawing back to you</h2>
+
+<p>
+  <a href="AvaSchematic.Connectivity.RuleChecker.html">RuleChecker</a> walks the finished sheet and reports
+  what does not obey the rulebook - two lines running together, a line across a part, a junction with more
+  branches than good practice allows.
+</p>
+
+<pre><code><span class="k">foreach</span> (<span class="k">var</span> problem <span class="k">in</span> <span class="k">new</span> RuleChecker().Check(document))
+    Console.WriteLine(problem.Message);
+<span class="c">// A line runs 42 units across Q1 near (180, -5).</span></code></pre>
+
+<p>
+  Each report carries the two items it is about, so a host can select them and show the user rather than
+  printing a sentence.
+</p>
+
+</main>
+</div>
+<footer>
+  <p>AvaSchematic 12.1.0-preview.1 · the reference is generated from the XML documentation comments in the source.</p>
+  <p>
+    <a href="../index.html">Home</a> ·
+    <a href="https://github.com/pavel-zheltiakov/AvaSchematic">GitHub</a> ·
+    <a href="https://github.com/pavel-zheltiakov/AvaSchematic/issues">Issues</a> ·
+  </p>
+</footer>
+</body>
+</html>

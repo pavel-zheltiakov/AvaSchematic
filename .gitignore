@@ -1,0 +1,8 @@
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+.vs/
+.vscode/
+.idea/
+.DS_Store

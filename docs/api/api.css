@@ -1,0 +1,240 @@
+/* One stylesheet, no build step, no framework. Dark and light both, from the reader's own setting. */
+:root {
+  --bg: #0f1219; --bg-alt: #131822; --panel: #151a23; --line: #232a36;
+  --text: #dbe0ea; --dim: #8f98a9; --accent: #7fd8a0; --code: #cbd4e4;
+  --codebg: #10141c; --bar: 56px;
+  /* header.css centres the bar's contents on these. They are .shell's width and .side's own
+     padding, so the brand sits directly above the first entry in the table of contents. */
+  --bar-width: 1360px; --bar-pad: 14px;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fbfcfd; --bg-alt: #f4f6f9; --panel: #ffffff; --line: #e3e7ee;
+    --text: #1a1f28; --dim: #5b6472; --accent: #1c7a4a; --code: #23303f;
+    --codebg: #f3f5f8;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* The top bar lives in ../header.css — the same file, the same markup and the same class names as the
+   landing page. It reads --bar and the palette above and nothing else. */
+
+/* ---- shell ---- */
+.shell { display: grid; grid-template-columns: 264px minmax(0, 1fr); max-width: 1360px; margin: 0 auto; }
+/* Exactly one viewport tall and sticky, so the panel is always a full-height column rather than a
+   stripe that stops wherever its contents happened to end. It scrolls itself when the open group is
+   long; the page scrolls independently. */
+.side {
+  border-right: 1px solid var(--line); background: var(--bg-alt);
+  padding: 20px 14px 40px;
+  position: sticky; top: var(--bar); align-self: start;
+  height: calc(100vh - var(--bar)); overflow-y: auto;
+}
+main { min-width: 0; padding: 32px 36px 72px; }
+
+/* ---- table of contents ---- */
+.toc a { color: var(--dim); text-decoration: none; display: block; }
+.toc a:hover { color: var(--text); }
+.toc a.current { color: var(--accent); font-weight: 600; }
+.toc-top { padding: 6px 10px; font-size: 13px; font-weight: 600; }
+.group { border-top: 1px solid var(--line); }
+.group:first-of-type { border-top: none; }
+.group > summary {
+  cursor: pointer; list-style: none; padding: 8px 10px;
+  font-size: 12px; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--dim); user-select: none;
+}
+.group > summary::-webkit-details-marker { display: none; }
+.group > summary::before { content: "›"; display: inline-block; width: 14px; color: var(--line); font-weight: 400; }
+.group[open] > summary::before { transform: rotate(90deg); }
+.group > summary:hover { color: var(--text); }
+.group > summary:hover::before { color: var(--dim); }
+.group ul { list-style: none; margin: 0 0 8px; padding: 0; }
+.group > ul > li > a { padding: 4px 10px 4px 24px; font-size: 13px; border-left: 2px solid transparent; }
+.group > ul > li > a.current { border-left-color: var(--accent); background: var(--panel); }
+.sub { margin: 2px 0 6px !important; }
+.sub a { padding: 3px 10px 3px 36px; font-size: 12px; }
+
+/* ---- prose ---- */
+h1 { font-size: 30px; letter-spacing: -0.02em; margin: 0 0 16px; }
+h2 { font-size: 18px; margin: 40px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--bar) + 12px); }
+h3 { font-size: 15px; margin: 24px 0 8px; }
+p { margin: 0 0 14px; }
+a { color: var(--accent); }
+.crumb { color: var(--dim); font-size: 13px; margin-bottom: 8px; }
+.crumb a { color: var(--dim); }
+.lede, .blurb { color: var(--dim); }
+.blurb { margin-top: -4px; }
+code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em; color: var(--code);
+}
+pre {
+  margin: 0 0 14px; padding: 10px 12px; overflow-x: auto;
+  background: var(--codebg); border: 1px solid var(--line); border-radius: 6px;
+}
+pre code { color: var(--code); white-space: pre; }
+pre.decl { font-size: 14px; }
+ul, ol { margin: 0 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+blockquote {
+  margin: 0 0 16px; padding: 12px 16px;
+  border-left: 3px solid var(--accent); background: var(--bg-alt); border-radius: 0 6px 6px 0;
+}
+blockquote p:last-child { margin-bottom: 0; }
+
+/* ---- the book ----
+   A chapter is prose with three recurring shapes in it: numbered steps, an aside worth knowing, and
+   the demo scene that shows the thing running. Each is styled once here rather than in every
+   fragment, so a chapter stays readable as HTML source. */
+h3 { scroll-margin-top: calc(var(--bar) + 12px); }
+
+/* An anchor with nothing in it, so a link can land somewhere that has no heading of its own. */
+.jump { display: block; height: 0; scroll-margin-top: calc(var(--bar) + 12px); }
+
+ol.steps { counter-reset: step; list-style: none; padding-left: 0; margin: 14px 0 18px; }
+ol.steps > li {
+  position: relative; padding-left: 34px; margin-bottom: 10px;
+}
+ol.steps > li::before {
+  counter-increment: step; content: counter(step);
+  position: absolute; left: 0; top: 1px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--bg-alt); border: 1px solid var(--line);
+  color: var(--dim); font-size: 11.5px; font-weight: 650;
+  display: flex; align-items: center; justify-content: center;
+}
+
+p.tip, div.tip {
+  margin: 16px 0; padding: 12px 16px;
+  border-left: 3px solid var(--line); background: var(--bg-alt);
+  border-radius: 0 6px 6px 0; color: var(--dim); font-size: 14px;
+}
+.tip strong, .tip b { color: var(--text); }
+.tip p { margin: 0 0 8px; }
+.tip p:last-child { margin: 0; }
+
+/* Run it yourself. Every chapter ends with the scene in the demo that shows what it just described,
+   because a paragraph about additive blending is worth less than four seconds of watching it. */
+.try {
+  margin: 26px 0 0; padding: 14px 18px;
+  background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px;
+}
+.try h3 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--dim); }
+.try p { margin: 0 0 10px; font-size: 14px; }
+.try pre { margin: 0; }
+
+/* Previous and next, because a book read in the sidebar is a book read out of order. */
+.chapter-nav {
+  display: flex; justify-content: space-between; gap: 16px;
+  margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+.chapter-nav a { text-decoration: none; }
+.chapter-nav .none { color: var(--dim); }
+
+/* A term link is not a navigation link: it is an offer, in the middle of a sentence, to go and find
+   out what a word means. It reads as text with a hint under it rather than as something to click. */
+a.term-link {
+  color: inherit; text-decoration: none;
+  border-bottom: 1px dotted var(--dim);
+}
+a.term-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ---- glossary ----
+   Every reference page links here, so an entry has to stand on its own: what the word means, then
+   what it is called in this API, then where it is taught. */
+.term { padding: 16px 0; border-top: 1px solid var(--line); scroll-margin-top: calc(var(--bar) + 12px); }
+.term:target { background: var(--bg-alt); border-radius: 8px; padding: 16px; }
+.term h3 { margin: 0 0 6px; font-size: 16px; }
+.term p { margin: 0 0 8px; }
+.term p:last-child { margin: 0; }
+.term .where { font-size: 13.5px; color: var(--dim); }
+.term .where code { font-size: 0.92em; }
+
+/* ---- code colouring ----
+   Three classes, applied by hand in the fragments. A tokeniser would be a build step, and the point
+   of this site is that there is not one. */
+pre .k { color: var(--accent); }
+pre .c { color: var(--dim); font-style: italic; }
+pre .s { color: #d3a76a; }
+@media (prefers-color-scheme: light) { pre .s { color: #9a5b12; } }
+
+/* ---- overview cards ---- */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-bottom: 8px; }
+.card {
+  display: block; padding: 16px 18px; text-decoration: none;
+  background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px;
+}
+.card:hover { border-color: var(--accent); }
+.card h3 { margin: 0 0 6px; font-size: 15px; color: var(--text); }
+.card p { margin: 0; font-size: 13px; color: var(--dim); }
+
+/* ---- member tables ---- */
+table.members { width: 100%; border-collapse: collapse; margin-bottom: 14px; display: block; overflow-x: auto; }
+table.members th { text-align: left; font-size: 12px; color: var(--dim); font-weight: 600; padding: 6px 12px 6px 0; }
+table.members td { vertical-align: top; padding: 12px 16px 12px 0; border-top: 1px solid var(--line); }
+table.members td:first-child { width: 40%; min-width: 240px; }
+table.members td p:last-child { margin-bottom: 0; }
+table.members pre { margin: 0; background: none; border: none; padding: 0; }
+dl.params { margin: 8px 0 0; }
+dl.params dt { font-size: 13px; margin-top: 6px; }
+dl.params dd { margin: 0 0 0 16px; color: var(--dim); }
+dl.params dd p { margin-bottom: 4px; }
+.returns { margin-top: 8px; }
+.returns span {
+  display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--dim); margin-right: 8px;
+}
+.returns p { display: inline; }
+.undocumented { color: var(--dim); }
+
+/* ---- diagrams ----
+   Hand-drawn SVG, coloured from the same custom properties as the page, so a diagram is legible in
+   both themes without shipping the picture twice. Narrow screens scroll it rather than shrink it:
+   a diagram squeezed to 320px is not a smaller diagram, it is an unreadable one. */
+.diagram { margin: 20px 0 26px; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; max-width: 720px; min-width: 600px; height: auto; }
+.d-band { fill: var(--bg-alt); stroke: var(--line); }
+.d-box { fill: var(--panel); stroke: var(--line); }
+.d-box-accent { fill: var(--panel); stroke: var(--accent); }
+.d-band-label {
+  fill: var(--dim); font: 650 10px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.d-title { fill: var(--text); font: 600 13.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.d-sub { fill: var(--dim); font: 11.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.d-mono { fill: var(--code); font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.d-mono-accent { fill: var(--accent); font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.d-edge { stroke: var(--dim); stroke-width: 1.4; fill: none; }
+.d-head { fill: var(--dim); }
+.d-note { fill: var(--dim); font: italic 11.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.d-rule { stroke: var(--line); stroke-width: 1; stroke-dasharray: 5 5; fill: none; }
+.caption { color: var(--dim); font-size: 13px; margin: -14px 0 22px; }
+
+/* ---- footer ---- */
+footer {
+  border-top: 1px solid var(--line); padding: 20px 24px; color: var(--dim); font-size: 12px;
+  text-align: center;
+}
+
+/* ---- narrow ----
+   The panel stops being a column and becomes a block above the content. Every group is still
+   collapsible, which is what keeps it from pushing the page off the screen. */
+
+/* header.css wraps the bar onto two rows here, and everything that scrolls to an anchor subtracts
+   --bar. It has to be corrected from this file, which loads after it. */
+@media (max-width: 860px) { :root { --bar: 94px; } }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .side {
+    position: static; height: auto; border-right: none;
+    border-bottom: 1px solid var(--line); padding-bottom: 12px;
+  }
+  main { padding: 24px 20px 56px; }
+}

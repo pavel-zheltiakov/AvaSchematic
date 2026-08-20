@@ -1,0 +1,15 @@
+<Project>
+    <!--
+        The switch that makes this copy of the demo build against the released package instead of against a
+        source tree that is not here. The same csproj file, unmodified, builds both ways - see the comment
+        beside the reference in AvaSchematic.Demo.csproj.
+    -->
+    <PropertyGroup>
+        <AvaSchematicFromPackage>true</AvaSchematicFromPackage>
+        <AvaSchematicVersion>12.1.0-preview.1</AvaSchematicVersion>
+
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+</Project>

@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.1" />
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!--
+      One demo, two ways of getting the control. In this repository it is the project next door, so an edit
+      to the library is visible in the demo immediately. In the public repository there is no src/, and
+      Directory.Build.props there sets AvaSchematicFromPackage, so the very same csproj restores the
+      released package from nuget.org instead - which is the only honest way to find out whether what was
+      published actually works.
+  -->
+  <ItemGroup Condition="'$(AvaSchematicFromPackage)' != 'true'">
+    <ProjectReference Include="..\..\src\AvaSchematic\AvaSchematic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(AvaSchematicFromPackage)' == 'true'">
+    <PackageReference Include="AvaSchematic" Version="$(AvaSchematicVersion)" />
+  </ItemGroup>
+</Project>

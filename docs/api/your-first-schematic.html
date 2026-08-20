@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1 · Your first schematic · AvaSchematic</title>
+<link rel="stylesheet" href="../header.css">
+<link rel="stylesheet" href="api.css">
+</head>
+<body>
+<header class="bar"><nav class="nav" aria-label="Site">
+  <a class="brand" href="../index.html" title="Home">Ava<span>Schematic</span></a>
+  <span class="tag">12.1.0-preview.1 · beta</span>
+  <div class="links">
+    <a href="../index.html">Home</a>
+    <a href="your-first-schematic.html">Guide</a>
+    <a href="index.html#reference">API Reference</a>
+    <a href="../releases.html">Releases</a>
+  </div>
+  <div class="links tools">
+    <details class="fb">
+      <summary>Feedback</summary>
+      <div class="fb-pop">
+        <a href="https://github.com/pavel-zheltiakov/AvaSchematic/issues"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg><span><b>GitHub Issues</b><small>A bug, a missing thing, a question — in the open, where the answer helps the next person.</small></span></a>
+      </div>
+    </details>
+    <a class="nav-ico" href="https://github.com/pavel-zheltiakov/AvaSchematic" title="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+  </div>
+</nav></header>
+<div class="shell">
+<aside class="side">
+<nav class="toc" aria-label="Documentation"><a class="toc-top" href="index.html">Overview</a><details class="group" open><summary>Guide</summary><ul><li><a class="current" aria-current="page" href="your-first-schematic.html">1 · Your first schematic</a><ul class="sub"><li><a href="#what">What a schematic actually is</a></li><li><a href="#three-words">Three words</a></li><li><a href="#control">The control</a></li><li><a href="#fifteen-lines">Fifteen lines</a></li><li><a href="#by-pin">Why AddNodeAtPin and not AddNode</a></li><li><a href="#next">What you have</a></li></ul></li><li><a href="parts-and-pins.html">2 · Parts and pins</a></li><li><a href="wires.html">3 · Wires</a></li><li><a href="dots-and-nets.html">4 · Dots and nets</a></li><li><a href="editing.html">5 · Editing with the mouse</a></li><li><a href="your-own-symbol.html">6 · Drawing your own part</a></li><li><a href="saving.html">7 · Saving, loading and checking</a></li><li><a href="glossary.html">Glossary</a></li></ul></details><details class="group"><summary>Concepts</summary><ul><li><a href="how-a-sheet-is-laid-out.html">How a sheet is laid out</a></li><li><a href="the-rulebook.html">The rulebook</a></li><li><a href="painting.html">How the drawing is painted</a></li></ul></details><details class="group"><summary>The control</summary><ul><li><a href="AvaSchematic.Controls.SchematicView.html">Controls.SchematicView</a></li><li><a href="AvaSchematic.Controls.SchematicViewport.html">Controls.SchematicViewport</a></li><li><a href="AvaSchematic.Controls.WheelBehavior.html">Controls.WheelBehavior</a></li><li><a href="AvaSchematic.Controls.SchematicItemEventArgs.html">Controls.SchematicItemEventArgs</a></li></ul></details><details class="group"><summary>The drawing</summary><ul><li><a href="AvaSchematic.Model.SchematicDocument.html">Model.SchematicDocument</a></li><li><a href="AvaSchematic.Model.SchematicItem.html">Model.SchematicItem</a></li><li><a href="AvaSchematic.Model.SchematicNode.html">Model.SchematicNode</a></li><li><a href="AvaSchematic.Model.SchematicConnection.html">Model.SchematicConnection</a></li><li><a href="AvaSchematic.Model.SchematicJunction.html">Model.SchematicJunction</a></li><li><a href="AvaSchematic.Model.ConnectionEndpoint.html">Model.ConnectionEndpoint</a></li><li><a href="AvaSchematic.Model.Port.html">Model.Port</a></li><li><a href="AvaSchematic.Model.SchematicAttribute.html">Model.SchematicAttribute</a></li><li><a href="AvaSchematic.Model.AttributeKeys.html">Model.AttributeKeys</a></li><li><a href="AvaSchematic.Model.ItemStyle.html">Model.ItemStyle</a></li><li><a href="AvaSchematic.Model.SchematicLayers.html">Model.SchematicLayers</a></li><li><a href="AvaSchematic.Model.SchematicCloner.html">Model.SchematicCloner</a></li><li><a href="AvaSchematic.Model.SchematicItemsChangedEventArgs.html">Model.SchematicItemsChangedEventArgs</a></li></ul></details><details class="group"><summary>Parts</summary><ul><li><a href="AvaSchematic.Symbols.SymbolLibrary.html">Symbols.SymbolLibrary</a></li><li><a href="AvaSchematic.Symbols.SymbolDefinition.html">Symbols.SymbolDefinition</a></li><li><a href="AvaSchematic.Symbols.SymbolBuilder.html">Symbols.SymbolBuilder</a></li><li><a href="AvaSchematic.Symbols.PortDefinition.html">Symbols.PortDefinition</a></li><li><a href="AvaSchematic.Symbols.Libraries.ElectronicSymbols.html">Symbols.Libraries.ElectronicSymbols</a></li><li><a href="AvaSchematic.Symbols.Libraries.BasicShapes.html">Symbols.Libraries.BasicShapes</a></li><li><a href="AvaSchematic.Symbols.Libraries.FlowchartSymbols.html">Symbols.Libraries.FlowchartSymbols</a></li><li><a href="AvaSchematic.Symbols.Libraries.ArchitectureSymbols.html">Symbols.Libraries.ArchitectureSymbols</a></li></ul></details><details class="group"><summary>What a symbol is drawn from</summary><ul><li><a href="AvaSchematic.Symbols.SymbolPrimitive.html">Symbols.SymbolPrimitive</a></li><li><a href="AvaSchematic.Symbols.SymbolLine.html">Symbols.SymbolLine</a></li><li><a href="AvaSchematic.Symbols.SymbolPolyline.html">Symbols.SymbolPolyline</a></li><li><a href="AvaSchematic.Symbols.SymbolRectangle.html">Symbols.SymbolRectangle</a></li><li><a href="AvaSchematic.Symbols.SymbolEllipse.html">Symbols.SymbolEllipse</a></li><li><a href="AvaSchematic.Symbols.SymbolArc.html">Symbols.SymbolArc</a></li><li><a href="AvaSchematic.Symbols.SymbolPath.html">Symbols.SymbolPath</a></li><li><a href="AvaSchematic.Symbols.SymbolText.html">Symbols.SymbolText</a></li><li><a href="AvaSchematic.Symbols.GeometryUtil.html">Symbols.GeometryUtil</a></li></ul></details><details class="group"><summary>The rulebook</summary><ul><li><a href="AvaSchematic.Model.SchematicRules.html">Model.SchematicRules</a></li></ul></details><details class="group"><summary>Laying out the lines</summary><ul><li><a href="AvaSchematic.Routing.IConnectionRouter.html">Routing.IConnectionRouter</a></li><li><a href="AvaSchematic.Routing.OrthogonalRouter.html">Routing.OrthogonalRouter</a></li><li><a href="AvaSchematic.Routing.DirectRouter.html">Routing.DirectRouter</a></li><li><a href="AvaSchematic.Routing.CurvedRouter.html">Routing.CurvedRouter</a></li><li><a href="AvaSchematic.Routing.PolylineRouter.html">Routing.PolylineRouter</a></li><li><a href="AvaSchematic.Routing.RouteRequest.html">Routing.RouteRequest</a></li><li><a href="AvaSchematic.Routing.RouteResult.html">Routing.RouteResult</a></li><li><a href="AvaSchematic.Routing.RouteKind.html">Routing.RouteKind</a></li><li><a href="AvaSchematic.Routing.RouteUtil.html">Routing.RouteUtil</a></li><li><a href="AvaSchematic.Routing.SegmentEditor.html">Routing.SegmentEditor</a></li><li><a href="AvaSchematic.Routing.SegmentMoveOptions.html">Routing.SegmentMoveOptions</a></li><li><a href="AvaSchematic.Routing.WireOccupancy.html">Routing.WireOccupancy</a></li></ul></details><details class="group"><summary>Reading the drawing back</summary><ul><li><a href="AvaSchematic.Connectivity.NetlistExtractor.html">Connectivity.NetlistExtractor</a></li><li><a href="AvaSchematic.Connectivity.Netlist.html">Connectivity.Netlist</a></li><li><a href="AvaSchematic.Connectivity.Net.html">Connectivity.Net</a></li><li><a href="AvaSchematic.Connectivity.Terminal.html">Connectivity.Terminal</a></li><li><a href="AvaSchematic.Connectivity.JunctionResolver.html">Connectivity.JunctionResolver</a></li><li><a href="AvaSchematic.Connectivity.JunctionPoint.html">Connectivity.JunctionPoint</a></li><li><a href="AvaSchematic.Connectivity.RuleChecker.html">Connectivity.RuleChecker</a></li><li><a href="AvaSchematic.Connectivity.RuleViolation.html">Connectivity.RuleViolation</a></li><li><a href="AvaSchematic.Connectivity.RuleViolationKind.html">Connectivity.RuleViolationKind</a></li></ul></details><details class="group"><summary>Mouse and keyboard</summary><ul><li><a href="AvaSchematic.Interaction.ITool.html">Interaction.ITool</a></li><li><a href="AvaSchematic.Interaction.ToolBase.html">Interaction.ToolBase</a></li><li><a href="AvaSchematic.Interaction.SelectTool.html">Interaction.SelectTool</a></li><li><a href="AvaSchematic.Interaction.WireTool.html">Interaction.WireTool</a></li><li><a href="AvaSchematic.Interaction.PlaceTool.html">Interaction.PlaceTool</a></li><li><a href="AvaSchematic.Interaction.PanTool.html">Interaction.PanTool</a></li><li><a href="AvaSchematic.Interaction.ToolPointerEventArgs.html">Interaction.ToolPointerEventArgs</a></li><li><a href="AvaSchematic.Interaction.SchematicHitTester.html">Interaction.SchematicHitTester</a></li><li><a href="AvaSchematic.Interaction.HitTestResult.html">Interaction.HitTestResult</a></li><li><a href="AvaSchematic.Interaction.HitKind.html">Interaction.HitKind</a></li><li><a href="AvaSchematic.Interaction.HitTestFilter.html">Interaction.HitTestFilter</a></li><li><a href="AvaSchematic.Interaction.ConnectionTools.html">Interaction.ConnectionTools</a></li><li><a href="AvaSchematic.Model.ResizeHandle.html">Model.ResizeHandle</a></li></ul></details><details class="group"><summary>Drawing it</summary><ul><li><a href="AvaSchematic.Rendering.SchematicRenderer.html">Rendering.SchematicRenderer</a></li><li><a href="AvaSchematic.Rendering.SchematicTheme.html">Rendering.SchematicTheme</a></li><li><a href="AvaSchematic.Rendering.SchematicRenderOptions.html">Rendering.SchematicRenderOptions</a></li><li><a href="AvaSchematic.Rendering.DrawingResources.html">Rendering.DrawingResources</a></li></ul></details><details class="group"><summary>Saving and loading</summary><ul><li><a href="AvaSchematic.Serialization.SchematicJson.html">Serialization.SchematicJson</a></li><li><a href="AvaSchematic.Serialization.DocumentDto.html">Serialization.DocumentDto</a></li><li><a href="AvaSchematic.Serialization.ItemDto.html">Serialization.ItemDto</a></li><li><a href="AvaSchematic.Serialization.EndpointDto.html">Serialization.EndpointDto</a></li><li><a href="AvaSchematic.Serialization.PortDto.html">Serialization.PortDto</a></li><li><a href="AvaSchematic.Serialization.AttributeDto.html">Serialization.AttributeDto</a></li><li><a href="AvaSchematic.Serialization.StyleDto.html">Serialization.StyleDto</a></li><li><a href="AvaSchematic.Serialization.RulesDto.html">Serialization.RulesDto</a></li><li><a href="AvaSchematic.Serialization.SymbolDto.html">Serialization.SymbolDto</a></li><li><a href="AvaSchematic.Serialization.PrimitiveDto.html">Serialization.PrimitiveDto</a></li></ul></details><details class="group"><summary>Undo</summary><ul><li><a href="AvaSchematic.Undo.UndoStack.html">Undo.UndoStack</a></li><li><a href="AvaSchematic.Undo.IUndoableAction.html">Undo.IUndoableAction</a></li><li><a href="AvaSchematic.Undo.DelegateAction.html">Undo.DelegateAction</a></li><li><a href="AvaSchematic.Undo.CompositeAction.html">Undo.CompositeAction</a></li></ul></details><details class="group"><summary>The small words</summary><ul><li><a href="AvaSchematic.Model.RouteMode.html">Model.RouteMode</a></li><li><a href="AvaSchematic.Model.ArrowHead.html">Model.ArrowHead</a></li><li><a href="AvaSchematic.Model.LineStyle.html">Model.LineStyle</a></li><li><a href="AvaSchematic.Model.PortSide.html">Model.PortSide</a></li><li><a href="AvaSchematic.Model.PortKind.html">Model.PortKind</a></li><li><a href="AvaSchematic.Model.EndpointKind.html">Model.EndpointKind</a></li><li><a href="AvaSchematic.Model.MirrorMode.html">Model.MirrorMode</a></li><li><a href="AvaSchematic.Model.LabelPlacement.html">Model.LabelPlacement</a></li><li><a href="AvaSchematic.Model.TextHAlign.html">Model.TextHAlign</a></li><li><a href="AvaSchematic.Model.TextVAlign.html">Model.TextVAlign</a></li><li><a href="AvaSchematic.Model.SymbolSizing.html">Model.SymbolSizing</a></li><li><a href="AvaSchematic.Model.BoundaryShape.html">Model.BoundaryShape</a></li><li><a href="AvaSchematic.Model.HitTestMode.html">Model.HitTestMode</a></li><li><a href="AvaSchematic.Model.GridStyle.html">Model.GridStyle</a></li><li><a href="AvaSchematic.Utils.ObservableObject.html">Utils.ObservableObject</a></li><li><a href="AvaSchematic.Utils.UpdateScope.html">Utils.UpdateScope</a></li><li><a href="AvaSchematic.Utils.GeometryExtensions.html">Utils.GeometryExtensions</a></li></ul></details></nav>
+</aside>
+<main>
+<p class="crumb"><a href="index.html">Documentation</a> · Guide</p><h1>1 · Your first schematic</h1><p class="lede">
+  This chapter assumes you have never drawn a circuit and have never used this library. By the end of it you
+  will know the three words the whole thing is built from, and you will have a working <a class="term-link" href="glossary.html#g-schematic">schematic</a> on the
+  screen in about fifteen lines. Every term introduced here is in the
+  <a href="glossary.html">glossary</a> too.
+</p>
+
+<h2 id="what">What a schematic actually is</h2>
+
+<p>
+  A schematic is not a picture of a circuit board. It does not say where anything sits, how long a wire is,
+  or how big a part really is. It says one thing only: <strong>what is joined to what</strong>.
+</p>
+
+<p>
+  That is why two people can draw the same circuit and get two drawings that look nothing alike but mean
+  exactly the same. A wire drawn as a long detour and a wire drawn as a short hop are the same wire. Moving a
+  part across the sheet changes nothing about the circuit - only about how easy the sheet is to read.
+</p>
+
+<p>
+  Everything in this library follows from that. The drawing is stored as things that are joined; where the
+  lines actually run is worked out afterwards, and worked out again whenever you move something.
+</p>
+
+<h2 id="three-words">Three words</h2>
+
+<ul>
+  <li><strong>Part</strong> - a resistor, a transistor, a box on an architecture diagram. In the API a part
+      is a <a href="AvaSchematic.Model.SchematicNode.html">SchematicNode</a>: a placement of a drawing.</li>
+  <li><strong><a class="term-link" href="glossary.html#g-pin">Pin</a></strong> - the spot on a part where a wire is allowed to attach. A resistor has two, a
+      transistor three, a chip forty. In the API a pin is a
+      <a href="AvaSchematic.Model.Port.html">Port</a>, and it has a name like <code>"1"</code> or
+      <code>"B"</code>.</li>
+  <li><strong>Wire</strong> - a join between two pins. In the API it is a
+      <a href="AvaSchematic.Model.SchematicConnection.html">SchematicConnection</a>, and it knows the two
+      ends it joins, not the path between them.</li>
+</ul>
+
+<div class="diagram">
+<svg viewBox="0 0 720 200" role="img" aria-labelledby="parts-title parts-desc">
+  <title id="parts-title">Two parts, four pins, one wire</title>
+  <desc id="parts-desc">
+    Two rectangles stand for parts. Each has a short lead on its left and right ending in a small circle,
+    which is a pin. A line joins the right pin of the first part to the left pin of the second: that is the
+    wire. The drawing stores the two pin names, not the line.
+  </desc>
+
+  <text class="d-band-label" x="10" y="24">a part</text>
+
+  <path class="d-edge" d="M70 110 L120 110"/>
+  <rect class="d-box" x="120" y="88" width="110" height="44" rx="3"/>
+  <path class="d-edge" d="M230 110 L280 110"/>
+  <circle class="d-box-accent" cx="70" cy="110" r="6"/>
+  <circle class="d-box-accent" cx="280" cy="110" r="6"/>
+  <text class="d-title" x="150" y="115">R1</text>
+  <text class="d-mono" x="52" y="145">pin "1"</text>
+  <text class="d-mono" x="262" y="145">pin "2"</text>
+
+  <path class="d-edge" d="M280 110 L440 110"/>
+  <text class="d-note" x="330" y="98">the wire</text>
+
+  <path class="d-edge" d="M440 110 L490 110"/>
+  <rect class="d-box" x="490" y="88" width="110" height="44" rx="3"/>
+  <path class="d-edge" d="M600 110 L650 110"/>
+  <circle class="d-box-accent" cx="440" cy="110" r="6"/>
+  <circle class="d-box-accent" cx="650" cy="110" r="6"/>
+  <text class="d-title" x="520" y="115">R2</text>
+  <text class="d-mono" x="422" y="145">pin "1"</text>
+  <text class="d-mono" x="632" y="145">pin "2"</text>
+</svg>
+</div>
+
+<h2 id="control">The control</h2>
+
+<p>
+  <a href="AvaSchematic.Controls.SchematicView.html">SchematicView</a> is an ordinary Avalonia control. Put
+  it in a window like any other.
+</p>
+
+<pre><code><span class="k">&lt;Window</span> xmlns:sch=<span class="s">"clr-namespace:AvaSchematic.Controls;assembly=AvaSchematic"</span><span class="k">&gt;</span>
+    <span class="k">&lt;sch:SchematicView</span> x:Name=<span class="s">"View"</span> <span class="k">/&gt;</span>
+<span class="k">&lt;/Window&gt;</span></code></pre>
+
+<p>
+  It has no content, no items panel and no templates. It owns a document and paints it, which is why one
+  control can show a sheet with ten thousand parts on it without ten thousand visuals existing.
+</p>
+
+<h2 id="fifteen-lines">Fifteen lines</h2>
+
+<p>
+  A <a href="AvaSchematic.Symbols.SymbolLibrary.html">SymbolLibrary</a> is a box of drawings with names on
+  them. <code>CreateDefault()</code> gives you the built-in one: eighty parts and shapes, electronics and
+  diagrams together. A <a href="AvaSchematic.Model.SchematicDocument.html">SchematicDocument</a> is the
+  sheet.
+</p>
+
+<pre><code><span class="k">using</span> AvaSchematic.Model;
+<span class="k">using</span> AvaSchematic.Symbols;
+<span class="k">using</span> AvaSchematic.Symbols.Libraries;
+
+<span class="k">var</span> library  = SymbolLibrary.CreateDefault();
+<span class="k">var</span> document = <span class="k">new</span> SchematicDocument(library) { GridSize = 10 };
+
+<span class="c">// A resistor, placed so that its pin "1" lands exactly on (0, 0).</span>
+<span class="k">var</span> r1 = document.AddNodeAtPin(ElectronicSymbols.ResistorIec, <span class="s">"1"</span>, <span class="k">new</span> Point(0, 0));
+r1.Designator = <span class="s">"R1"</span>;
+r1.Value      = <span class="s">"10k"</span>;
+
+<span class="c">// A ground symbol, 100 units below it.</span>
+<span class="k">var</span> gnd = document.AddNodeAtPin(ElectronicSymbols.Ground, <span class="s">"1"</span>, <span class="k">new</span> Point(0, 100));
+
+<span class="c">// Join the resistor's other end to it.</span>
+document.Connect(r1, <span class="s">"2"</span>, gnd, <span class="s">"1"</span>);
+
+View.Document = document;
+View.ZoomToFit();</code></pre>
+
+<p>
+  That is a complete, correct schematic: a 10k resistor to <a class="term-link" href="glossary.html#g-ground">ground</a>. Run it and you will see the resistor, its
+  <a class="term-link" href="glossary.html#g-designator">designator</a> and value beside it, the ground <a class="term-link" href="glossary.html#g-symbol">symbol</a>, and a line joining them - a line nobody drew.
+</p>
+
+<h2 id="by-pin">Why <code>AddNodeAtPin</code> and not <code>AddNode</code></h2>
+
+<p>
+  Both exist. <a href="AvaSchematic.Model.SchematicDocument.html#m-addnode">AddNode</a> places a part by the
+  top-left corner of its box, which is what you want for a diagram box you are about to type a caption into.
+</p>
+
+<p>
+  <a href="AvaSchematic.Model.SchematicDocument.html#m-addnodeatpin">AddNodeAtPin</a> places it by one of
+  its pins instead, and in a schematic that is nearly always the thing you actually know. You know the <a class="term-link" href="glossary.html#g-net">net</a>
+  should run down the left of the sheet at x = 0; you do not know or care that this particular resistor
+  symbol's box starts 30 units to the left of its first pin. Place by pin and every pin lands on the grid,
+  whatever the symbol happens to be and however it is turned.
+</p>
+
+<h2 id="next">What you have</h2>
+
+<p>
+  A document, two parts and a wire. Nothing here said where the line should run, and that is the point: the
+  next chapter is about the parts, and the one after that is about how the line found its way.
+</p>
+
+</main>
+</div>
+<footer>
+  <p>AvaSchematic 12.1.0-preview.1 · the reference is generated from the XML documentation comments in the source.</p>
+  <p>
+    <a href="../index.html">Home</a> ·
+    <a href="https://github.com/pavel-zheltiakov/AvaSchematic">GitHub</a> ·
+    <a href="https://github.com/pavel-zheltiakov/AvaSchematic/issues">Issues</a> ·
+  </p>
+</footer>
+</body>
+</html>

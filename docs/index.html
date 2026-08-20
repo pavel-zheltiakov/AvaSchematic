@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AvaSchematic — schematics and diagrams for Avalonia</title>
+<meta name="description" content="A schematic and diagram control for Avalonia. Electronic schematics, mindmaps, flowcharts, UML and architecture drawings on one node-port-connection core, with wires that route themselves and obey the drawing conventions.">
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="site.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+
+<!--
+  The shared header. Same markup, same class names and the same header.css as the other sites in this
+  family. Links on the left beside the name they qualify; on the right the two things that are true of the
+  project rather than of the page.
+-->
+<header class="bar"><nav class="nav" aria-label="Site">
+  <a class="brand" href="index.html" title="Home">Ava<span>Schematic</span></a>
+  <span class="tag">12.1.0-preview.1 · beta</span>
+  <div class="links">
+    <a href="index.html" data-i18n="nav.home">Home</a>
+    <a href="api/your-first-schematic.html" data-i18n="nav.guide">Guide</a>
+    <a href="api/index.html#reference" data-i18n="nav.api">API Reference</a>
+    <a href="releases.html" data-i18n="nav.releases">Releases</a>
+  </div>
+  <div class="links tools">
+    <details class="fb">
+      <summary data-i18n="fb.summary">Feedback</summary>
+      <div class="fb-pop">
+        <a href="https://github.com/pavel-zheltiakov/AvaSchematic/issues"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg><span><b data-i18n="fb.issues.t">GitHub Issues</b><small data-i18n="fb.issues.d">A bug, a missing part, a question — in the open, where the answer helps the next person.</small></span></a>
+      </div>
+    </details>
+    <a class="nav-ico" href="https://github.com/pavel-zheltiakov/AvaSchematic" title="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+  </div>
+</nav></header>
+
+<!--
+  The hero says the one sentence a visitor needs and then gets out of the way. The two commands are above
+  the buttons because they are shorter than the buttons are, and because someone who arrived knowing what
+  this is should be able to leave with the line they came for.
+-->
+<div class="hero-wrap">
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow" data-i18n="hero.eyebrow">Freeware · commercial use included</p>
+    <h1 data-i18n="hero.title">Schematics that draw their own wires.</h1>
+    <p class="lede" data-i18n="hero.lede">
+      A control for Avalonia that draws electronic schematics — and mindmaps, flowcharts, UML and
+      architecture diagrams, because underneath they are the same thing. You say which pins are joined;
+      it works out where every line runs, keeps two lines out of one lane, takes them round the parts,
+      and puts a dot exactly where three of them meet.
+    </p>
+
+    <div class="get">
+      <div class="get-row">
+        <span class="get-label" data-i18n="hero.get.install">Install the package</span>
+        <code>dotnet add package AvaSchematic --prerelease</code>
+        <button class="copy" type="button" data-copy title="Copy to the clipboard">
+          <span class="copy-label" data-i18n="hero.get.copied">Copied</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6.4L14.6 2H9zm0 2h4v4h4v6H9V4zM5 6v12a2 2 0 0 0 2 2h9v-2H7V6H5z"/></svg>
+          <span class="sr">Copy</span>
+        </button>
+      </div>
+      <div class="get-row">
+        <span class="get-label" data-i18n="hero.get.clone">Run the demo</span>
+        <code>git clone https://github.com/pavel-zheltiakov/AvaSchematic.git</code>
+        <button class="copy" type="button" data-copy title="Copy to the clipboard">
+          <span class="copy-label" data-i18n="hero.get.copied">Copied</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6.4L14.6 2H9zm0 2h4v4h4v6H9V4zM5 6v12a2 2 0 0 0 2 2h9v-2H7V6H5z"/></svg>
+          <span class="sr">Copy</span>
+        </button>
+      </div>
+    </div>
+
+    <p class="beta-note" data-i18n-html="hero.beta">
+      <strong>This is a beta.</strong> The drawing, the routing and the file format work; the API may still
+      move before 12.1.0 final.
+    </p>
+
+    <div class="hero-actions">
+      <a class="button primary" href="api/your-first-schematic.html" data-i18n="hero.cta.guide">Start with chapter one</a>
+      <a class="button" href="api/index.html#reference" data-i18n="hero.cta.api">API reference</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- One picture, full width, before any prose: a schematic is a thing you recognise on sight. -->
+<section class="stage">
+  <div class="stage-frame">
+    <img src="shots/electronics.png" width="1800" height="1200" alt="An amplifier and LED driver schematic: an op-amp with its feedback network, a transistor driving an LED, a microcontroller, junction dots where nets branch and unconnected pins ringed in orange.">
+  </div>
+  <p class="stage-note" data-i18n-html="stage.note">
+    <strong>Every line here was placed by the library.</strong> The document says the op-amp output is joined
+    to R4 pin 1; where that line runs, which lane it takes and where the dots go are worked out from the
+    drawing conventions, and worked out again the moment anything moves.
+  </p>
+</section>
+
+<section id="story" class="story">
+  <h2 data-i18n="story.h">The same control, six ways</h2>
+
+  <div class="slider" data-slider>
+    <div class="track">
+
+      <figure class="slide">
+        <img src="shots/electronics.png" width="1800" height="1200" loading="lazy"
+             alt="An electronic schematic with resistors, capacitors, an op-amp, a transistor, an LED and a microcontroller.">
+        <figcaption>
+          <h3 data-i18n="story.s1.h">1 · An electronic schematic</h3>
+          <p data-i18n="story.s1.p">
+            Parts placed by pin, so everything lands on the grid whatever the symbol is. Designators and
+            values beside each part, pin names and numbers on the chip, a ring on every pin no wire reaches,
+            and a dot wherever a net really branches.
+          </p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="shots/wiring-rules.png" width="1800" height="1200" loading="lazy"
+             alt="Six small drawings demonstrating the wiring rules: crossing, tap, corner, four-way junction, two wires on a pin, and a link going round a transistor.">
+        <figcaption>
+          <h3 data-i18n="story.s2.h">2 · The rules, drawn out</h3>
+          <p data-i18n="story.s2.p">
+            A crossing is not a join, so it gets no dot. A line ending on a line is a join, so it does. Four
+            links that would share one vertical run each get a lane of their own. And a link never crosses a
+            part it is not wired to.
+          </p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="shots/architecture.png" width="1800" height="1200" loading="lazy"
+             alt="A software architecture diagram: a customer, a web app, an API gateway, services, a queue, Postgres and Redis inside a dashed platform boundary.">
+        <figcaption>
+          <h3 data-i18n="story.s3.h">3 · An architecture drawing</h3>
+          <p data-i18n="story.s3.p">
+            The same core with a different symbol library. Connectors attach to whole shapes rather than
+            pins, so they slide round the outline as either box is dragged, and the dashed boundary is a
+            container — things inside it are not fenced in by it.
+          </p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="shots/mindmap.png" width="1800" height="1200" loading="lazy"
+             alt="A mindmap with a central bubble and curved branches out to coloured leaf bubbles.">
+        <figcaption>
+          <h3 data-i18n="story.s4.h">4 · A mindmap</h3>
+          <p data-i18n="story.s4.p">
+            Curved links, shapes that stretch to fit their text, and branches that tap onto other branches.
+            No dots anywhere, because a mindmap has no notion of a solder joint — that is one rule, changed.
+          </p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="shots/flowchart.png" width="1800" height="1200" loading="lazy"
+             alt="A flowchart with a terminator, process boxes, a decision diamond with yes and no branches, and a document symbol.">
+        <figcaption>
+          <h3 data-i18n="story.s5.h">5 · A flowchart</h3>
+          <p data-i18n="story.s5.p">
+            Right-angled links with arrow heads and labelled branches. The decision diamond is a symbol like
+            any other, and the labels on its two ways out are wire labels.
+          </p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="shots/uml.png" width="1800" height="1200" loading="lazy"
+             alt="A UML class diagram with compartments for fields and methods, generalisation and composition arrows and multiplicities.">
+        <figcaption>
+          <h3 data-i18n="story.s6.h">6 · A UML class diagram</h3>
+          <p data-i18n="story.s6.p">
+            Compartments are attributes on the node, so a class box is a symbol with three text fields. The
+            hollow triangle and the filled diamond are arrow heads on the link.
+          </p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide">
+        <img src="shots/symbol-sheet.png" width="1800" height="1200" loading="lazy"
+             alt="Eighty built-in symbols laid out on one sheet: resistors, capacitors, transistors, gates, flowchart shapes, architecture boxes and basic shapes.">
+        <figcaption>
+          <h3 data-i18n="story.s7.h">7 · Eighty parts in the box</h3>
+          <p data-i18n="story.s7.p">
+            Everything built in, on one sheet. Add your own with a six-line builder, or turn a datasheet's
+            pin list into a chip symbol with one call.
+          </p>
+        </figcaption>
+      </figure>
+
+    </div>
+    <button class="slide-nav prev" type="button" data-prev aria-label="Previous">‹</button>
+    <button class="slide-nav next" type="button" data-next aria-label="Next">›</button>
+    <div class="dots" role="tablist" data-dots></div>
+  </div>
+</section>
+
+<section class="features">
+  <h2 data-i18n="features.h">What it does for you</h2>
+
+  <div class="grid">
+    <article>
+      <h3 data-i18n="features.f1.h">Wires route themselves</h3>
+      <p data-i18n="features.f1.p">
+        You say which two pins are joined. Right angles, a straight stub out of every pin, the fewest bends
+        that will do, and a fresh route the moment anything moves.
+      </p>
+    </article>
+    <article>
+      <h3 data-i18n="features.f2.h">Two lines never share a lane</h3>
+      <p data-i18n="features.f2.p">
+        Wires that would run alongside each other step into the next free lane instead. Crossing is fine;
+        running together is what a reader cannot untangle.
+      </p>
+    </article>
+    <article>
+      <h3 data-i18n="features.f3.h">Lines go round parts</h3>
+      <p data-i18n="features.f3.p">
+        A line across a transistor looks exactly like a line connected to it. Parts are solid, and when no
+        elbow will fit past one, a search finds the way round.
+      </p>
+    </article>
+    <article>
+      <h3 data-i18n="features.f4.h">Dots that mean something</h3>
+      <p data-i18n="features.f4.p">
+        A dot is drawn where three or more directions of one net meet — and nowhere else. A crossing gets
+        none, a corner gets none, a pin with one wire gets none.
+      </p>
+    </article>
+    <article>
+      <h3 data-i18n="features.f5.h">The circuit, as data</h3>
+      <p data-i18n="features.f5.p">
+        One call gives you the net list: every net and the pins on it, named after the ground, rail or net
+        label it reaches. One more call checks the sheet against its own rules.
+      </p>
+    </article>
+    <article>
+      <h3 data-i18n="features.f6.h">Editing that behaves</h3>
+      <p data-i18n="features.f6.p">
+        Drag a part and the wires follow. Drag one run of a wire and the runs either side stretch. Drag a
+        designator and it stays with its part. Every gesture is one undo step.
+      </p>
+    </article>
+    <article>
+      <h3 data-i18n="features.f7.h">Nothing is a control</h3>
+      <p data-i18n="features.f7.p">
+        The whole sheet is painted in one pass with no visual per item, so ten thousand parts cost what ten
+        do. Zoom is a matrix, not a re-layout.
+      </p>
+    </article>
+    <article>
+      <h3 data-i18n="features.f8.h">One file, no surprises</h3>
+      <p data-i18n="features.f8.p">
+        Plain JSON that holds the drawing and, if you ask, the symbols it used — so a sheet opens on a
+        machine that has never heard of your parts.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section class="start">
+  <h2 data-i18n="start.h">A whole schematic, in fifteen lines</h2>
+
+  <pre class="install"><code>var library  = SymbolLibrary.CreateDefault();
+var document = new SchematicDocument(library) { GridSize = 10 };
+
+var r1 = document.AddNodeAtPin(ElectronicSymbols.ResistorIec, "1", new Point(0, 0));
+r1.Designator = "R1";
+r1.Value      = "10k";
+
+var gnd = document.AddNodeAtPin(ElectronicSymbols.Ground, "1", new Point(0, 100));
+document.Connect(r1, "2", gnd, "1");
+
+View.Document = document;
+View.ZoomToFit();</code></pre>
+
+  <p class="footnote" data-i18n-html="start.note">
+    <code>AddNodeAtPin</code> places a part by one of its pins rather than by its bounding box, which is the
+    thing you actually know when you are drawing a circuit. Chapter one walks through every line of this.
+  </p>
+
+  <div class="cards">
+    <a class="card" href="api/your-first-schematic.html">
+      <h3 data-i18n="start.c1.h">The guide</h3>
+      <p data-i18n="start.c1.p">Seven short chapters, from "what is a schematic" to making your own parts. Assumes nothing.</p>
+    </a>
+    <a class="card" href="api/index.html#reference">
+      <h3 data-i18n="start.c2.h">API reference</h3>
+      <p data-i18n="start.c2.p">Every public type, grouped by what you are trying to do rather than by namespace.</p>
+    </a>
+    <a class="card" href="api/the-rulebook.html">
+      <h3 data-i18n="start.c3.h">The rulebook</h3>
+      <p data-i18n="start.c3.p">Every drawing convention in one object, what each protects, and when to turn it off.</p>
+    </a>
+    <a class="card" href="https://github.com/pavel-zheltiakov/AvaSchematic/issues">
+      <h3 data-i18n="start.c4.h">Issues</h3>
+      <p data-i18n="start.c4.p">A bug, a missing part, a question. In the open, where the answer helps the next person.</p>
+    </a>
+  </div>
+</section>
+
+<section class="limits">
+  <h2 data-i18n="limits.h">What it does not do</h2>
+  <p class="lede" data-i18n="limits.lede">
+    Worth knowing before you install it rather than after.
+  </p>
+  <ul>
+    <li data-i18n="limits.l1">
+      <strong>It is not an EDA package.</strong> There is no board layout, no simulation, no part database and
+      no design-rule check beyond the drawing conventions. It draws sheets and tells you what is joined to
+      what; what you do with that is yours.
+    </li>
+    <li data-i18n="limits.l2">
+      <strong>Hierarchical sheets are not built in.</strong> One document is one sheet. Nets are named across
+      a sheet by labels, rails and grounds, and joining sheets together is the host's job.
+    </li>
+    <li data-i18n="limits.l3">
+      <strong>Buses are a drawing convention, not a type.</strong> A thick labelled line is a line with a
+      label and a thicker stroke; nothing expands D[0..7] into eight nets for you.
+    </li>
+    <li data-i18n="limits.l4">
+      <strong>Avoidance has a ceiling.</strong> Past six hundred wires on one sheet the overlap and obstacle
+      passes switch off, because beyond that a stacked line is cheaper than a frozen editor. The number is a
+      rule you can change.
+    </li>
+    <li data-i18n="limits.l5">
+      <strong>A part is not a control.</strong> The sheet is painted, not composed, so you cannot put an
+      Avalonia button inside a resistor. Panels, menus and dialogs live outside the surface as usual.
+    </li>
+  </ul>
+</section>
+
+<footer>
+  <p data-i18n-html="footer.p">
+    <strong>AvaSchematic</strong> — a schematic and diagram control for
+    <a href="https://avaloniaui.net/">Avalonia</a>. Freeware; see the licence in the repository for the
+    exact terms.
+  </p>
+  <p class="thin">
+    <a href="api/your-first-schematic.html">Guide</a> ·
+    <a href="api/index.html#reference">API Reference</a> ·
+    <a href="releases.html">Releases</a> ·
+    <a href="https://github.com/pavel-zheltiakov/AvaSchematic">GitHub</a> ·
+    <a href="https://github.com/pavel-zheltiakov/AvaSchematic/issues">Issues</a>
+  </p>
+</footer>
+
+<script src="site.js" defer></script>
+</body>
+</html>
