@@ -6,7 +6,7 @@
     -->
     <PropertyGroup>
         <AvaSchematicFromPackage>true</AvaSchematicFromPackage>
-        <AvaSchematicVersion>12.1.0-preview.1</AvaSchematicVersion>
+        <AvaSchematicVersion>12.1.0-preview.2</AvaSchematicVersion>
 
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>

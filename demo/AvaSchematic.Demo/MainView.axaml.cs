@@ -22,6 +22,10 @@ public partial class MainView : UserControl
 
     public MainView()
     {
+        // Two parts this application draws for itself. Registered before anything else, so they are
+        // in the palette beside the eighty that came in the box and behave exactly like them.
+        CustomSymbols.AddTo(_library);
+
         InitializeComponent();
         WireUp();
         LoadSample(0);
@@ -83,6 +87,7 @@ public partial class MainView : UserControl
         SegmentDragCheck.IsCheckedChanged += (_, _) => ApplyRules();
         JunctionBranchesField.ValueChanged += (_, _) => ApplyRules();
         CheckRulesButton.Click += (_, _) => ShowRuleReport();
+        OwnPartsButton.Click += (_, _) => ShowOwnParts();
     }
 
     // ---- drawing rules ------------------------------------------------------------------------
@@ -224,7 +229,14 @@ public partial class MainView : UserControl
             1 => new[] { "Architecture", "Basic" },
             2 => new[] { "Flowchart", "Basic" },
             3 => new[] { "Architecture", "Basic" },
-            4 or 5 => new[] { "Passive", "Discrete", "Analog", "Logic", "Power", "Sources", "Annotation", "Connectors", "Integrated circuits", "Electromechanical", "RF" },
+            4 or 5 => new[]
+            {
+                // First, so that the parts this application drew for itself are the first thing in
+                // the list rather than something to scroll past the shipped ones to find.
+                CustomSymbols.Category,
+                "Passive", "Discrete", "Analog", "Logic", "Power", "Sources", "Annotation",
+                "Connectors", "Integrated circuits", "Electromechanical", "RF"
+            },
             _ => Array.Empty<string>()
         };
 
@@ -469,6 +481,20 @@ public partial class MainView : UserControl
     }
 
     // ---- status -----------------------------------------------------------------------------
+
+    /// <summary>
+    /// Shows what it took to draw the two parts in the "Your own parts" group.
+    ///
+    /// They are in the palette a few inches away, so the interesting question is not what they look
+    /// like but how little stands between wanting a part and having one - and the honest way to answer
+    /// that is the source itself, taken from the file that compiles.
+    /// </summary>
+    private void ShowOwnParts()
+    {
+        ReportBox.Text = CustomSymbols.RelaySource;
+        HintText.Text = "Both parts are in the palette under \"" + CustomSymbols.Category +
+                        "\" - place them like any other.";
+    }
 
     private void UpdateStatus()
     {

@@ -18,7 +18,7 @@
 -->
 <header class="bar"><nav class="nav" aria-label="Site">
   <a class="brand" href="index.html" title="Home">Ava<span>Schematic</span></a>
-  <span class="tag">12.1.0-preview.1 · beta</span>
+  <span class="tag">12.1.0-preview.2 · beta</span>
   <div class="links">
     <a href="index.html" data-i18n="nav.home">Home</a>
     <a href="demo/" data-i18n="nav.demo">Demo</a>
@@ -279,11 +279,11 @@
   <pre class="install"><code>var library  = SymbolLibrary.CreateDefault();
 var document = new SchematicDocument(library) { GridSize = 10 };
 
-var r1 = document.AddNodeAtPin(ElectronicSymbols.ResistorIec, "1", new Point(0, 0));
+var r1 = document.AddNodeAtPin(Symbols.Electric.ResistorIEC, "1", new Point(0, 0));
 r1.Designator = "R1";
 r1.Value      = "10k";
 
-var gnd = document.AddNodeAtPin(ElectronicSymbols.Ground, "1", new Point(0, 100));
+var gnd = document.AddNodeAtPin(Symbols.Electric.GND, "1", new Point(0, 100));
 document.Connect(r1, "2", gnd, "1");
 
 View.Document = document;

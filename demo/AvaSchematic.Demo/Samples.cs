@@ -7,6 +7,11 @@ using AvaSchematic.Symbols.Libraries;
 
 namespace AvaSchematic.Demo;
 
+
+// AvaSchematic.Symbols is a namespace as well as the key catalogue's name, so inside
+// this tree the alias says which one is meant. Callers in their own namespace need none.
+using Symbols = AvaSchematic.Symbols.Libraries.Symbols;
+
 /// <summary>
 /// Sample documents. They double as API documentation: the same control, the same document type and
 /// the same tools produce a mindmap, an architecture drawing, a flowchart and a real schematic -
@@ -23,7 +28,7 @@ public static class Samples
     {
         var doc = new SchematicDocument(library) { Name = "Mind map", GridSize = 5 };
 
-        var root = doc.AddNode(BasicShapes.Capsule, new Point(-90, -26), "Schematic control");
+        var root = doc.AddNode(Symbols.Basic.Capsule, new Point(-90, -26), "Schematic control");
         root.Size = new Size(180, 52);
         root.Style.Fill = Rgb(0x2D3A8C);
         root.Style.Foreground = Colors.White;
@@ -49,7 +54,7 @@ public static class Samples
     private static void AddBranch(SchematicDocument doc, SchematicNode root, string title, Color color,
         Point origin, string[] leaves)
     {
-        var branch = doc.AddNode(BasicShapes.RoundedRectangle, origin, title);
+        var branch = doc.AddNode(Symbols.Basic.RoundedRectangle, origin, title);
         branch.Size = new Size(160, 44);
         branch.Style.Fill = color;
         branch.Style.Foreground = Colors.White;
@@ -70,7 +75,7 @@ public static class Samples
         for (int i = 0; i < leaves.Length; i++)
         {
             double leafY = branchCenterY - leafHeight / 2 + (i - (leaves.Length - 1) / 2.0) * leafPitch;
-            var leaf = doc.AddNode(BasicShapes.Capsule, new Point(leafX, leafY), leaves[i]);
+            var leaf = doc.AddNode(Symbols.Basic.Capsule, new Point(leafX, leafY), leaves[i]);
             leaf.Size = new Size(leafWidth, leafHeight);
             leaf.Style.Fill = Colors.White;
             leaf.Style.Stroke = color;
@@ -104,23 +109,23 @@ public static class Samples
     {
         var doc = new SchematicDocument(library) { Name = "Architecture", GridSize = 10 };
 
-        var user = doc.AddNode(ArchitectureSymbols.Actor, new Point(-460, 40), "Customer");
+        var user = doc.AddNode(Symbols.Arch.Actor, new Point(-460, 40), "Customer");
         var web = Service(doc, new Point(-300, 20), "Web app", "React");
         var gateway = Service(doc, new Point(-90, 20), "API gateway", "Envoy");
         var auth = Service(doc, new Point(-90, -140), "Auth service", "OIDC");
         var orders = Service(doc, new Point(150, -60), "Order service", "Go");
         var billing = Service(doc, new Point(150, 110), "Billing service", "Java");
 
-        var queue = doc.AddNode(ArchitectureSymbols.Queue, new Point(400, -40), "orders.events");
+        var queue = doc.AddNode(Symbols.Arch.Queue, new Point(400, -40), "orders.events");
         queue.Size = new Size(150, 46);
 
-        var db = doc.AddNode(ArchitectureSymbols.Database, new Point(390, 100), "Postgres");
+        var db = doc.AddNode(Symbols.Arch.Database, new Point(390, 100), "Postgres");
         db.Size = new Size(110, 100);
 
-        var cache = doc.AddNode(ArchitectureSymbols.Cache, new Point(390, 240), "Redis");
+        var cache = doc.AddNode(Symbols.Arch.Cache, new Point(390, 240), "Redis");
         cache.Size = new Size(110, 100);
 
-        var stripe = doc.AddNode(ArchitectureSymbols.ExternalSystem, new Point(150, 280), "Stripe");
+        var stripe = doc.AddNode(Symbols.Arch.ExternalSystem, new Point(150, 280), "Stripe");
         stripe.Size = new Size(150, 60);
 
         Flow(doc, user, web, "HTTPS");
@@ -134,7 +139,7 @@ public static class Samples
         Flow(doc, billing, stripe, "charge", dashed: true);
         Flow(doc, orders, cache, "cache", dashed: true);
 
-        var boundary = doc.AddNode(ArchitectureSymbols.Boundary, new Point(-130, -190), "Platform");
+        var boundary = doc.AddNode(Symbols.Arch.Boundary, new Point(-130, -190), "Platform");
         boundary.Size = new Size(700, 500);
         boundary.ZIndex = -10;
         boundary.Style.Stroke = Rgb(0x8A93A6);
@@ -144,7 +149,7 @@ public static class Samples
 
     private static SchematicNode Service(SchematicDocument doc, Point position, string title, string stereotype)
     {
-        var node = doc.AddNode(ArchitectureSymbols.Service, position, title);
+        var node = doc.AddNode(Symbols.Arch.Service, position, title);
         node.Size = new Size(150, 64);
         node.Style.Fill = Rgb(0xEAF1FB);
         node.Style.Stroke = Rgb(0x3A6DB0);
@@ -187,14 +192,14 @@ public static class Samples
     {
         var doc = new SchematicDocument(library) { Name = "Flowchart", GridSize = 10 };
 
-        var start = Shape(doc, FlowchartSymbols.Terminator, new Point(-70, -260), "Start", 140, 50);
-        var read = Shape(doc, FlowchartSymbols.Data, new Point(-90, -170), "Read order", 180, 60);
-        var check = Shape(doc, FlowchartSymbols.Decision, new Point(-100, -60), "In stock?", 200, 90);
-        var reserve = Shape(doc, FlowchartSymbols.Process, new Point(-90, 80), "Reserve items", 180, 60);
-        var backorder = Shape(doc, FlowchartSymbols.Process, new Point(200, -45), "Create backorder", 180, 60);
-        var charge = Shape(doc, FlowchartSymbols.PredefinedProcess, new Point(-90, 190), "Charge card", 180, 60);
-        var store = Shape(doc, FlowchartSymbols.Database, new Point(-90, 300), "Persist order", 180, 70);
-        var stop = Shape(doc, FlowchartSymbols.Terminator, new Point(-70, 410), "Done", 140, 50);
+        var start = Shape(doc, Symbols.Flow.Terminator, new Point(-70, -260), "Start", 140, 50);
+        var read = Shape(doc, Symbols.Flow.Data, new Point(-90, -170), "Read order", 180, 60);
+        var check = Shape(doc, Symbols.Flow.Decision, new Point(-100, -60), "In stock?", 200, 90);
+        var reserve = Shape(doc, Symbols.Flow.Process, new Point(-90, 80), "Reserve items", 180, 60);
+        var backorder = Shape(doc, Symbols.Flow.Process, new Point(200, -45), "Create backorder", 180, 60);
+        var charge = Shape(doc, Symbols.Flow.PredefinedProcess, new Point(-90, 190), "Charge card", 180, 60);
+        var store = Shape(doc, Symbols.Flow.Database, new Point(-90, 300), "Persist order", 180, 70);
+        var stop = Shape(doc, Symbols.Flow.Terminator, new Point(-70, 410), "Done", 140, 50);
 
         Step(doc, start, "S", read, "N");
         Step(doc, read, "S", check, "N");
@@ -252,18 +257,18 @@ public static class Samples
 
         // --- rail decoupling ---------------------------------------------------------------
         var vcc0 = Power(doc, -500, -40, "+5V");
-        var c1 = Part(doc, ElectronicSymbols.CapacitorPolarized, "1", -500, 0, "C1", "100u", rotation: 90);
+        var c1 = Part(doc, Symbols.Electric.CapacitorPolarized, "1", -500, 0, "C1", "100u", rotation: 90);
         var gnd0 = Gnd(doc, -500, 80);
         doc.Connect(vcc0, "1", c1, "1");
         doc.Connect(c1, "2", gnd0, "1");
 
         // --- RC input filter ---------------------------------------------------------------
-        var input = doc.AddNodeAtPin(ElectronicSymbols.NetLabel, "1", new Point(-500, 200),
+        var input = doc.AddNodeAtPin(Symbols.Electric.NetLabel, "1", new Point(-500, 200),
             mirror: MirrorMode.Horizontal);
         input.Value = "IN";
 
-        var r1 = Part(doc, ElectronicSymbols.ResistorIec, "1", -460, 200, "R1", "10k");
-        var c2 = Part(doc, ElectronicSymbols.Capacitor, "1", -400, 240, "C2", "1n", rotation: 90);
+        var r1 = Part(doc, Symbols.Electric.ResistorIEC, "1", -460, 200, "R1", "10k");
+        var c2 = Part(doc, Symbols.Electric.Capacitor, "1", -400, 240, "C2", "1n", rotation: 90);
         var gnd1 = Gnd(doc, -400, 320);
 
         doc.Connect(input, "1", r1, "1");
@@ -271,12 +276,12 @@ public static class Samples
         doc.Connect(c2, "2", gnd1, "1");
 
         // --- non-inverting amplifier -------------------------------------------------------
-        var opamp = doc.AddNodeAtPin(ElectronicSymbols.OpAmp, "IN+", new Point(-300, 200));
+        var opamp = doc.AddNodeAtPin(Symbols.Electric.OpAmp, "IN+", new Point(-300, 200));
         opamp.Designator = "U1A";
         opamp.Value = "TL072";
 
-        var r2 = Part(doc, ElectronicSymbols.ResistorIec, "2", -210, 80, "R2", "10k");
-        var r3 = Part(doc, ElectronicSymbols.ResistorIec, "1", -340, 220, "R3", "10k", rotation: 90);
+        var r2 = Part(doc, Symbols.Electric.ResistorIEC, "2", -210, 80, "R2", "10k");
+        var r3 = Part(doc, Symbols.Electric.ResistorIEC, "1", -340, 220, "R3", "10k", rotation: 90);
         var gnd2 = Gnd(doc, -340, 300);
         var vcc1 = Power(doc, -270, 130, "+5V");
         var gnd3 = Gnd(doc, -270, 260);
@@ -290,10 +295,10 @@ public static class Samples
         doc.Connect(opamp, "V-", gnd3, "1");
 
         // --- LED driver --------------------------------------------------------------------
-        var r4 = Part(doc, ElectronicSymbols.ResistorIec, "1", -180, 190, "R4", "4k7");
-        var q1 = Part(doc, ElectronicSymbols.NpnTransistor, "B", -90, 190, "Q1", "BC547");
-        var r5 = Part(doc, ElectronicSymbols.ResistorIec, "2", -60, 100, "R5", "330", rotation: 90);
-        var led = Part(doc, ElectronicSymbols.Led, "2", -60, 20, "D1", "GREEN", rotation: 90);
+        var r4 = Part(doc, Symbols.Electric.ResistorIEC, "1", -180, 190, "R4", "4k7");
+        var q1 = Part(doc, Symbols.Electric.NPN, "B", -90, 190, "Q1", "BC547");
+        var r5 = Part(doc, Symbols.Electric.ResistorIEC, "2", -60, 100, "R5", "330", rotation: 90);
+        var led = Part(doc, Symbols.Electric.LED, "2", -60, 20, "D1", "GREEN", rotation: 90);
         var vcc2 = Power(doc, -60, -70, "+5V");
         var gnd4 = Gnd(doc, -60, 260);
 
@@ -305,15 +310,11 @@ public static class Samples
         doc.Connect(q1, "E", gnd4, "1");
 
         // --- microcontroller ---------------------------------------------------------------
-        // A part symbol built at runtime from nothing but a pin list - the usual way an
-        // application turns a datasheet into a usable schematic symbol.
-        var mcuSymbol = ElectronicSymbols.CreateIc("el/mcu-demo", "STM32G031",
-            new[] { "VDD", "VSS", "NRST", "PA0", "PA1" },
-            new[] { "PA2", "PA3", "PB0", "SWDIO", "SWCLK" },
-            120);
-        library.Register(mcuSymbol);
+        // Not one of the eighty in the box: this application drew it - see CustomSymbols - and from
+        // here it is an ordinary part.
+        CustomSymbols.AddTo(library);
 
-        var mcu = doc.AddNodeAtPin("el/mcu-demo", "L0", new Point(100, 120));
+        var mcu = doc.AddNodeAtPin(CustomSymbols.Keys.MCU, "L0", new Point(100, 120));
         mcu.Designator = "U2";
 
         var vcc3 = Power(doc, 60, 60, "+3V3");
@@ -321,7 +322,7 @@ public static class Samples
         doc.Connect(vcc3, "1", mcu, "L0");
         doc.Connect(mcu, "L1", gnd5, "1");
 
-        var pwm = doc.AddNodeAtPin(ElectronicSymbols.NetLabel, "1", new Point(320, 120));
+        var pwm = doc.AddNodeAtPin(Symbols.Electric.NetLabel, "1", new Point(320, 120));
         pwm.Value = "PWM";
         doc.Connect(mcu, "R0", pwm, "1");
 
@@ -366,13 +367,13 @@ public static class Samples
 
     private static SchematicNode Power(SchematicDocument doc, double x, double y, string rail)
     {
-        var node = doc.AddNodeAtPin(ElectronicSymbols.PowerRail, "1", new Point(x, y));
+        var node = doc.AddNodeAtPin(Symbols.Electric.PowerRail, "1", new Point(x, y));
         node.Value = rail;
         return node;
     }
 
     private static SchematicNode Gnd(SchematicDocument doc, double x, double y, double rotation = 0)
-        => doc.AddNodeAtPin(ElectronicSymbols.Ground, "1", new Point(x, y), rotation);
+        => doc.AddNodeAtPin(Symbols.Electric.GND, "1", new Point(x, y), rotation);
 
     // ---- UML class diagram --------------------------------------------------------------------
 
@@ -410,7 +411,7 @@ public static class Samples
     private static SchematicNode ClassBox(SchematicDocument doc, Point position, string name,
         string fields, string methods)
     {
-        var node = doc.AddNode(ArchitectureSymbols.ClassBox, position);
+        var node = doc.AddNode(Symbols.Arch.ClassBox, position);
         node.Size = new Size(200, 130);
         node.Style.Fill = Rgb(0xFFFDF3);
         node.Style.Stroke = Rgb(0x4A4335);
@@ -500,9 +501,9 @@ public static class Samples
             "four links that would share one vertical run, each given its own lane");
         for (int i = 0; i < 4; i++)
         {
-            var source = doc.AddNodeAtPin(ElectronicSymbols.ResistorIec, "1", new Point(430, 120 + i * 60));
+            var source = doc.AddNodeAtPin(Symbols.Electric.ResistorIEC, "1", new Point(430, 120 + i * 60));
             source.Designator = "R" + (i + 1);
-            var target = doc.AddNodeAtPin(ElectronicSymbols.ResistorIec, "1", new Point(820, 400 + i * 60));
+            var target = doc.AddNodeAtPin(Symbols.Electric.ResistorIEC, "1", new Point(820, 400 + i * 60));
             target.Designator = "R" + (i + 5);
 
             var link = doc.Connect(source, "2", target, "1");
@@ -518,7 +519,7 @@ public static class Samples
         // Two wires arriving at one pin. Three things touch, but only two lines leave the point, so
         // there is nothing for a dot to disambiguate.
         double pin = Case(doc, 4, "Two wires on a pin: no dot", "a pin is a terminal, not a branch");
-        var terminal = doc.AddNodeAtPin(ElectronicSymbols.ResistorIec, "1", new Point(160, pin), rotation: 90);
+        var terminal = doc.AddNodeAtPin(Symbols.Electric.ResistorIEC, "1", new Point(160, pin), rotation: 90);
         terminal.Designator = "R9";
         Wire(doc, new Point(60, pin), new Point(160, pin));
         Wire(doc, new Point(260, pin), new Point(160, pin));
@@ -526,11 +527,11 @@ public static class Samples
         // A part standing in the way of a link it has nothing to do with: the line goes round it.
         Label(doc, new Point(430, 660), "Lines go round parts",
             "a link never crosses a symbol it is not wired to");
-        var source10 = doc.AddNodeAtPin(ElectronicSymbols.ResistorIec, "1", new Point(430, 760));
+        var source10 = doc.AddNodeAtPin(Symbols.Electric.ResistorIEC, "1", new Point(430, 760));
         source10.Designator = "R10";
-        var target10 = doc.AddNodeAtPin(ElectronicSymbols.ResistorIec, "1", new Point(830, 760));
+        var target10 = doc.AddNodeAtPin(Symbols.Electric.ResistorIEC, "1", new Point(830, 760));
         target10.Designator = "R11";
-        var blocker = doc.AddNode(ElectronicSymbols.NpnTransistor, new Point(610, 725));
+        var blocker = doc.AddNode(Symbols.Electric.NPN, new Point(610, 725));
         blocker.Designator = "Q1";
         doc.Connect(source10, "2", target10, "1");
 
@@ -547,12 +548,12 @@ public static class Samples
 
     private static void Label(SchematicDocument doc, Point at, string title, string subtitle)
     {
-        var node = doc.AddNode(BasicShapes.TextOnly, at, title);
+        var node = doc.AddNode(Symbols.Basic.Text, at, title);
         node.Size = new Size(260, 18);
         node.Style.FontSize = 13;
         node.Style.Bold = true;
 
-        var note = doc.AddNode(BasicShapes.TextOnly, new Point(at.X, at.Y + 18), subtitle);
+        var note = doc.AddNode(Symbols.Basic.Text, new Point(at.X, at.Y + 18), subtitle);
         note.Size = new Size(300, 16);
         note.Style.FontSize = 11;
         note.Style.Foreground = Rgb(0x6B7280);

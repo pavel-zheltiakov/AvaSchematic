@@ -53,11 +53,11 @@ protecting.
 var library  = SymbolLibrary.CreateDefault();
 var document = new SchematicDocument(library) { GridSize = 10 };
 
-var r1 = document.AddNodeAtPin(ElectronicSymbols.ResistorIec, "1", new Point(0, 0));
+var r1 = document.AddNodeAtPin(Symbols.Electric.ResistorIEC, "1", new Point(0, 0));
 r1.Designator = "R1";
 r1.Value      = "10k";
 
-var gnd = document.AddNodeAtPin(ElectronicSymbols.Ground, "1", new Point(0, 100));
+var gnd = document.AddNodeAtPin(Symbols.Electric.GND, "1", new Point(0, 100));
 document.Connect(r1, "2", gnd, "1");
 
 View.Document = document;
