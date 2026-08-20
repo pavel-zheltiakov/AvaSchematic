@@ -71,7 +71,11 @@ View.ActiveTool = <span class="k">new</span> PanTool();                       <s
       on the grid <em>by one of its pins</em>, not by its box.</li>
   <li><strong>A whole run of a wire</strong> - select the line, then grab the small diamond in the middle
       of any straight run and slide it sideways. The runs either side stretch to follow. A run touching a
-      pin grows a jog instead of pulling the wire off the pin.</li>
+      pin grows a jog instead of pulling the wire off the pin - and a run too short to hold that jog does
+      not move at all, because the Z it would become would be a line drawn out and straight back a couple
+      of units away from itself.</li>
+  <li><strong>A bend</strong> - drag the square handle on any corner. On a line drawn with right angles
+      the two runs that meet there move with it, so the line keeps its right angles.</li>
   <li><strong>The end of a wire</strong> - drag the square handle at either end onto another pin to
       re-wire it.</li>
   <li><strong>A label</strong> - a <a class="term-link" href="glossary.html#g-designator">designator</a> or a value can be picked on its own and dragged where it
